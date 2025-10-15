@@ -1,0 +1,54 @@
+{
+  "name": "animation-resume",
+  "version": "1.0.0",
+  "description": "animation resume",
+  "author": " <>",
+  "private": true,
+  "scripts": {
+    "dev": "node build/dev-server.js",
+    "build": "node build/build.js"
+  },
+  "dependencies": {
+    "marked": "^2.1.3",
+    "prismjs": "^1.30.0",
+    "vue": "^2.7.16"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.7.7",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^6.4.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-preset-stage-3": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "chalk": "^1.1.3",
+    "connect-history-api-fallback": "^1.6.0",
+    "css-loader": "^0.28.11",
+    "eventsource-polyfill": "^0.9.6",
+    "express": "^4.21.2",
+    "extract-text-webpack-plugin": "^2.1.2",
+    "file-loader": "^0.11.2",
+    "friendly-errors-webpack-plugin": "^1.7.0",
+    "function-bind": "^1.1.2",
+    "html-webpack-plugin": "^2.30.1",
+    "http-proxy-middleware": "^0.17.4",
+    "opn": "^4.0.2",
+    "ora": "^1.4.0",
+    "semver": "^5.7.2",
+    "shelljs": "^0.7.8",
+    "url-loader": "^0.6.2",
+    "vue-loader": "^10.3.0",
+    "vue-style-loader": "^2.0.5",
+    "vue-template-compiler": "^2.7.16",
+    "webpack": "^2.7.0",
+    "webpack-bundle-analyzer": "^2.13.1",
+    "webpack-dev-middleware": "^1.12.2",
+    "webpack-hot-middleware": "^2.26.1",
+    "webpack-merge": "^2.6.1"
+  },
+  "engines": {
+    "node": ">= 12.0.0",
+    "npm": ">= 6.0.0"
+  }
+}
