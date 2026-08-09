@@ -54,3 +54,16 @@ package-backup.json
 package-modern.json
 package-updated-conservative.json
 package-vue2-working.json
+
+# Tooling (Hermes / OpenCode)
+.hermes/
+NUL
+
+# Generic caches
+.cache/
+.temp/
+.tmp/
+
+# Deployment platform state (uncomment if used)
+# .netlify/
+# .vercel/

@@ -2,8 +2,11 @@
   "name": "hoelee-profile",
   "version": "2.0.0",
   "description": "Hoelee's animated resume - modernized",
-  "author": "Hoelee <>",
-  "private": true,
+  "author": "Hoelee <me@hoelee.com>",
+  "private": false,
+  "license": "Apache-2.0",
+  "homepage": "https://me.hoelee.com",
+  "repository": "https://github.com/hoelee/hoelee-profile",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
