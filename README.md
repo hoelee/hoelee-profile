@@ -2,11 +2,18 @@
 
 > Type your way to a stunning developer showcase.
 
+## Demo
+
+See the live animated resume in action:
+
+- **Primary site** → [**me.hoelee.com**](https://me.hoelee.com)
+- **GitHub Pages mirror** → [**hoelee.github.io/hoelee-profile**](https://hoelee.github.io/hoelee-profile/)
+
 [![Live demo](https://img.shields.io/badge/demo-me.hoelee.com-0066cc)](https://me.hoelee.com)
 [![GitHub Pages](https://img.shields.io/badge/demo-github.io-2ea44f)](https://hoelee.github.io/hoelee-profile/)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
 
-An interactive animated resume template built with Vue 3 and Vite. It is inspired by and credits [jirengu-inc/animating-resume](https://github.com/jirengu-inc/animating-resume).
+An interactive animated resume template built with Vue 3 and Vite.
 
 ## Quick Start
 
@@ -81,4 +88,4 @@ Licensed under [Apache-2.0](LICENSE).
 
 ## Credits
 
-Inspired by the original [animating-resume](https://github.com/jirengu-inc/animating-resume) project by jirengu-inc.
+This project is inspired by and credits [jirengu-inc/animating-resume](https://github.com/jirengu-inc/animating-resume) — the original animated resume project by jirengu-inc.
