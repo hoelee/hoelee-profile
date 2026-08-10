@@ -3,6 +3,7 @@
 > Type your way to a stunning developer showcase.
 
 [![Live demo](https://img.shields.io/badge/demo-me.hoelee.com-0066cc)](https://me.hoelee.com)
+[![GitHub Pages](https://img.shields.io/badge/demo-github.io-2ea44f)](https://hoelee.github.io/hoelee-profile/)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
 
 An interactive animated resume template built with Vue 3 and Vite. It is inspired by and credits [jirengu-inc/animating-resume](https://github.com/jirengu-inc/animating-resume).
@@ -58,7 +59,7 @@ Set `typingSpeed` in `src/config/profile.js` to control the milliseconds per cha
 
 | Platform | Approach |
 | --- | --- |
-| GitHub Pages | The included GitHub Actions workflow deploys every push to `main`. |
+| GitHub Pages | [hoelee.github.io/hoelee-profile](https://hoelee.github.io/hoelee-profile/) — auto-deploys via GitHub Actions on every push to `main`. |
 | Netlify | Build with `npm run build` and publish `dist/`. |
 | Vercel | Import the repository; Vite settings are detected automatically. |
 | Static server | Upload the contents of `dist/` to any static web server. |
