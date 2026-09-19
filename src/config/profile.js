@@ -1,72 +1,80 @@
 export default {
   // Personal info
   name: 'Mr. Hoelee',
-  title: 'Web3 Developer & Full Stack Engineer',
-  githubUrl: 'https://github.com/hoelee/',
+  title: 'Full Stack Engineer · AI & Automation · DevOps',
+  githubUrl: 'https://git.hoelee.com/hoelee',
 
   // Animation speed (ms per character typed)
   // Lower = faster. Recommended range: 1 (instant) to 20 (dramatic slow)
   typingSpeed: 1,
 
   // Resume content in Markdown
-  resumeMarkdown: `Mr. Hoelee
+  resumeMarkdown: `Mr. Hoelee (Lee Teong Hoe)
 ====
-Hi, I'm Mr. Hoelee — a Web3 Developer & Experience Full Stack Engineer.
-I design and build bridges between Web2 and Web3 — crafting scalable backend systems, gas-optimized smart contracts, and immersive decentralized frontends.
-My passion lies at the intersection of blockchain innovation, AI automation, and full-stack engineering — shaping how the next internet will work.
+Full Stack Engineer with ~10 years building production web systems — PHP/CodeIgniter and Java/Spring backends, relational data layers, and the Docker infrastructure that runs them.
+I work end to end: gather the requirements, design the schema and APIs, build the app, deploy it, and keep it running in production.
+Recent focus is AI and automation — LLM-backed assistants, OCR document verification, and workflow automation that removes manual work from real business processes.
 
 About Me
 ----
-I'm a passionate Web3 developer with hands-on experience creating secure, upgradeable, and gas-efficient ERC-20 / ERC-721 smart contracts using Solidity, Hardhat, and Foundry.
-Beyond the blockchain, I bring an enterprise-level backend mindset — leveraging Java Spring Boot, CodeIgniter, and Dockerized infrastructure to scale decentralized apps with the reliability of traditional systems.
-When I'm not building, I explore the evolving Web3 landscape — from Layer 2 protocols and DAO governance to DeFi innovation and on-chain analytics.
-My mission: to merge creativity, code, and cryptography into meaningful digital experiences.
+I'm a hands-on engineer who likes owning a system from the first requirement to production support.
+Day to day that means CodeIgniter and Spring Boot services, WordPress builds for clients, and a self-hosted Docker stack of 30+ services (reverse proxy, SSO, databases, monitoring, backups, automation) that I run and maintain myself.
+I'm comfortable being the only technical person on a project: talking to the client, making the architecture call, writing the code, and handling the production incident.
+I use AI as a working tool — coding assistants, local LLMs, and automation pipelines — to move faster without lowering the quality bar.
 
-Web3 & Blockchain
+Core Skills
 ----
-  - Solidity smart contracts (ERC-20 / ERC-721 / upgradeable patterns)
-  - Hardhat, Foundry testing, OpenZeppelin & Chainlink Oracles
-  - Alchemy SDK, Polygon, IPFS integration
+  - Languages: PHP, Java, JavaScript, SQL, Python (scripting), Bash
+  - Backend & Frameworks: CodeIgniter 4, Spring Boot, Spring Data JPA / Hibernate, REST API design, WordPress plugin development
+  - Databases: MySQL, PostgreSQL, SQL Server, SQLite, Redis, Elasticsearch, Memcached
+  - Frontend: HTML5, CSS3, JavaScript, Vue 3, jQuery, Bootstrap, responsive UI
+  - DevOps & Infrastructure: Docker, Docker Compose, Portainer, Traefik, Nginx, IIS, Cloudflare, Linux (Ubuntu/Debian), Windows Server, Synology DSM, unRAID
+  - AI & Automation: OpenAI API, LLM integration, prompt engineering, OCR pipelines, IBM Watson Assistant, n8n, local LLM inference (LM Studio, llama.cpp)
+  - Tooling: Git (Gitea/GitHub/GitLab), VS Code, NetBeans, Postman, Chrome extension development
 
-Frontend Development
+Selected Projects
 ----
-  - Web3.js / Ethers.js integration
-  - JavaScript, jQuery, HTML5, CSS3
-  - UI/UX prototyping with Photoshop, Illustrator, Canva
+  - DigiKedai AI customer-support bot — multi-channel (Telegram + WhatsApp) support bot in TypeScript, LiteLLM + PostgreSQL, containerised on NAS behind a Cloudflare tunnel webhook.
+  - OCR invoice verification + AI customer service — replaces manual data entry by extracting and validating receipt fields, with an LLM layer drafting replies.
+  - Real-time GPS delivery tracking platform — live order and driver tracking with automated dispatch and scheduling; included the rider-side Android app.
+  - Self-hosted production infrastructure — 30+ Docker services across NAS and VPS: Traefik reverse proxy with custom bot-filter middleware, authentik SSO, PostgreSQL/MySQL, backups, monitoring and automation.
+  - Digital product catalogue + delivery system — NocoDB catalogue, n8n-backed single-use access links, and per-download logging for digital goods sales.
+  - Numerology report engine (CodeIgniter 4) — print-ready A4 report generation staged for token-gated PDF delivery.
+  - Client web builds — 30+ delivered SME, NGO and e-commerce sites on WordPress (Kadence, Elementor, JetEngine) plus custom PHP applications.
 
-Backend & DevOps
+Experience
 ----
-  - PHP CodeIgniter (Web2↔Web3 bridge)
-  - Java Spring Boot + Hibernate for scalable data layers
-  - Databases: MySQL, MongoDB, Memcached, Elasticsearch
-  - Docker, Nginx, IIS, OpenLiteSpeed, Apache Tomcat, WordPress
-  - Server management (Windows, Ubuntu, unRaid, DSM)
+  Full Stack Software Engineer — Joywood, Perak, Malaysia (2020 – Present)
+  - Delivered 30+ production websites and business systems for SME, NGO and e-commerce clients, owning each from requirements through deployment and support.
+  - Built AI features into client products: OpenAI-backed assistants, OCR data capture, chatbots and workflow automation.
+  - Developed and maintained PHP (CodeIgniter) applications, WordPress plugins and Java Spring Boot services.
+  - Designed and operated the self-hosted Docker infrastructure (30+ services) covering auth, monitoring, backup, databases, automation and reverse proxying.
 
-Work Ethic
-----
-  - Effective Communicator: Strong written & verbal clarity in remote teams
-  - Problem-Solver: Adaptive mindset for complex, high-speed development
-  - Continuous Learner: Always exploring blockchain advancements
-  - AI-Driven: Using AI to accelerate workflows and creative tasks
-  - Client-Focused: Prioritizing real solutions and transparent delivery
+  Project Manager / Software Engineer — Edufly (2019 – 2020)
+  - Led development of an MLM e-commerce platform and integrated its payment gateway.
+  - Coordinated an external development team and managed delivery scope and timelines.
+  - Built Java Spring automation tools for Shopee bulk listing, product scraping and internal workflows.
+  - Integrated Telegram, WhatsApp, Facebook Messenger and web chat bots, plus email marketing automation.
 
-Education - Bachelor of Information System (Hons)
+  Software Engineer — Superceed (M) Sdn. Bhd., Remote (2016 – 2019)
+  - Enterprise Java Spring Boot web applications and Android apps.
+  - Real-time GPS delivery tracking platform with live map and automated customer assignment.
+  - IBM Watson Assistant chatbot, speech synthesis/recognition and face-recognition customer verification.
+
+Education — Bachelor of Information System (Hons)
 ----
   - Universiti Tunku Abdul Rahman (UTAR), Kampar, Malaysia
-  - March 2016 | CGPA: 3.06 / 4.00 - Degree In Merit
-  - Download Certificate → [hoelee.com/cert](https://hoelee.com/cert)
+  - March 2016 | CGPA: 3.06 / 4.00 — Degree with Merit
+  - Certificate: [hoelee.com/cert](https://hoelee.com/cert)
 
 Languages
 ----
 English | Malay | Mandarin | Cantonese | Hokkien
 
-Interests
+Currently Learning
 ----
-  - DeFi Innovation
-  - DAO Governance
-  - AI-assisted Development
-  - Cryptography
-  - On-Chain Analytics
+  - Solidity and smart-contract fundamentals (ERC-20 / ERC-721 with Foundry and Hardhat) — a side interest, not my day job.
+  - Local LLM inference and self-hosted AI tooling.
 
 
 `,
@@ -76,31 +84,28 @@ Interests
 Thank you for reading!
 ----
 
-I'm open to remote collaborations and Web3-driven projects.
+I'm open to full-time, contract and remote engineering roles — building and running web systems end to end.
 
-Let's build something that connects the decentralized future with real-world impact.
+The best fit is a team that needs one person who can own the whole stack: backend, frontend, deployment and production support.
 
-* WhatsApp Mr Hoelee Now  → [+6012-7972969](https://wa.me/60127972969)
-* Email Mr Hoelee Now  → [me@hoelee.com](mailto:me@hoelee.com)
-* Passionate about bridging the gap between traditional systems and decentralized technologies
-* Ready to contribute to innovative Web3 projects that solve real-world problems
-* Available for remote collaboration with forward-thinking teams and startups
-* Let's discuss how we can leverage blockchain technology to create meaningful digital experiences
+* WhatsApp  → [+6012-7972969](https://wa.me/60127972969)
+* Email  → [me@hoelee.com](mailto:me@hoelee.com)
+* GitHub  → [git.hoelee.com/hoelee](https://git.hoelee.com/hoelee)
+* Based in Perak, Malaysia — remote-friendly, open to hybrid in Malaysia
 
-Get in touch to explore opportunities in:
-* DeFi protocol development
-* Smart contract architecture and optimization
-* Web3 frontend integration
-* Scalable backend systems for dApps
-* Cross-chain solutions and Layer 2 implementations
+Where I can contribute:
+* Full stack application development (PHP/CodeIgniter, Java/Spring Boot, JavaScript)
+* AI and automation features — LLM assistants, OCR pipelines, workflow automation
+* DevOps and self-hosted infrastructure — Docker, reverse proxy, CI/CD, monitoring, backups
+* Taking existing systems in hand: maintenance, upgrades, performance and reliability
 
   `,
 
   // CSS animation stages — array of CSS strings typed in sequence
   desktopStyles: [
     `/*
- * GitHub: https://github.com/hoelee/
- * Hi, I'm Mr. Hoelee — Web3 Developer & Full Stack Engineer
+ * Gitea: https://git.hoelee.com/hoelee
+ * Hi, I'm Mr. Hoelee — Full Stack Engineer, AI & Automation, DevOps
  * Let me create an animated resume!
  */
 
@@ -117,8 +122,9 @@ html {
   margin:0;
 }
 #foot{
-  height:29vh;
+  height:30vh;
   margin:0;
+  overflow: hidden;
 }
 
 /* Set border */
@@ -127,7 +133,7 @@ html {
   border: 1px solid;
   margin: .5em;
   overflow: auto;
-  width: 50vw; height: 70vh;
+  width: calc(50vw - 1em); height: 70vh;
   background: rgb(20,20,20);
 }
 /* Code highlighting */
@@ -141,7 +147,7 @@ html{
   perspective: 1000px;
 }
 .styleEditor {
-  position: fixed; left: 0; top: 0;
+  position: fixed; left: .5em; top: 0;
   -webkit-transition: none;
   transition: none;
   -webkit-transform: rotateY(10deg) translateZ(-100px);
@@ -150,9 +156,9 @@ html{
 
 /* Prepare an editor */
 .resumeEditor{
-  position: fixed; right: 0; top: 0;
+  position: fixed; right: .5em; top: 0;
   padding: .5em;  margin: .5em;
-  width: 50vw; height: 70vh;
+  width: calc(50vw - 1em); height: 70vh;
   border: 1px solid;
   background: rgb(200,200,200); color: #222;
   overflow: auto;
@@ -167,7 +173,7 @@ html{
  * then add some styles to HTML
  */
 .resumeEditor{
-  padding: 0.5em;
+  padding: 1em;
 }
 .resumeEditor h1{
   font-size: 1.3em;
@@ -202,14 +208,14 @@ html{
  * Thanks for everyone's attention.
  */
 .styleEditor{
-    width:49vw;
+    width: calc(49vw - 1em);
     height:70vh;
-    margin-left:1.2vw;
+    margin-left:1vw;
 }
 .resumeEditor{
-   width:49vw;
+   width: calc(49vw - 1em);
    height:70vh;
-   margin-right:1.2em;
+   margin-right:1vw;
 }
 
 .thankEditor{
@@ -217,23 +223,47 @@ html{
   background: #E9D9BB;
   color: #001C42;
   overflow: auto;
+  padding: 1.25em 1.75em;
+  margin: .75em auto;
+  box-sizing: border-box;
+}
+
+.thankEditor h2{
+  margin-top: 0;
+  padding-bottom: .35em;
+  border-bottom: 2px solid rgba(0,28,66,.35);
+}
+
+/* readable link colour on the light background */
+.thankEditor a{
+  color: #0b4a6f;
+  font-weight: 600;
+  text-decoration-color: rgba(11,74,111,.5);
+}
+.thankEditor a:hover{
+  color: #06304a;
+  text-decoration-color: #06304a;
+}
+
+.thankEditor li::before{
+  color: #0b4a6f !important;
 }
 
 .thankEditor {
-  width: 99vw; height: 45vh;
+  width: 99vw; height: calc(30vh - 1.5em);
   border: 1px solid #ccc;
   font-size: .9em;
 }
 `,`
 .thankEditor{
-  padding: .5em;  margin: .5em; margin-top:1em;
+  padding: 1.25em 1.75em;  margin: .5em auto;
 }
 
 .thankEditor ul,.thankEditor ol{
   list-style: none;
 }
 .thankEditor ul> li::before{
-  content: '☞'; color: red;
+  content: '☞'; color: #0b4a6f;
   margin-right: .5em;
 }
 .thankEditor ol {
@@ -247,20 +277,27 @@ html{
 
 .thankEditor{
   width: 95vw; 
-  height: 45vh;
-  margin: 0 auto;
+  height: calc(30vh - 1.5em);
+  margin: .5em auto;
+  padding: 1.25em 1.75em;
+  box-sizing: border-box;
   -webkit-transition: none;
   transition: none;
   -webkit-transform: rotateX(-10deg) translateZ(-200px);
           transform: rotateX(-10deg) translateZ(-200px);
 }
 
+/* keep the page itself from ever scrolling */
+body{
+  overflow-x: hidden;
+}
+
 `],
 
   mobileStyles: [
     `/*
- * GitHub: https://github.com/hoelee/
- * Hi, I'm Mr. HoeleeWeb3 Developer & Full Stack Engineer
+ * Gitea: https://git.hoelee.com/hoelee
+ * Hi, I'm Mr. Hoelee — Full Stack Engineer, AI & Automation, DevOps
  * Let me create an animated resume!
  */
 
@@ -376,6 +413,11 @@ html{
 }
 .resumeEditor a:hover {
   text-decoration: underline;
+}
+/* keep the page itself from ever scrolling */
+html, body{
+  overflow-x: hidden;
+  max-width: 100%;
 }
 `]
 }

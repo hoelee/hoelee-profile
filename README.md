@@ -1,91 +1,97 @@
-# Animated Profile
+# hoelee-profile
 
-> Type your way to a stunning developer showcase.
+Personal profile and animated resume for **Lee Teong Hoe (Mr Hoelee)** — Full Stack Engineer · AI & Automation · DevOps.
 
-## Demo
+**Live:** https://me.hoelee.com
 
-See the live animated resume in action:
-
-- **Primary site** → [**me.hoelee.com**](https://me.hoelee.com)
-- **GitHub Pages mirror** → [**hoelee.github.io/hoelee-profile**](https://hoelee.github.io/hoelee-profile/)
-
-[![Live demo](https://img.shields.io/badge/demo-me.hoelee.com-0066cc)](https://me.hoelee.com)
-[![GitHub Pages](https://img.shields.io/badge/demo-github.io-2ea44f)](https://hoelee.github.io/hoelee-profile/)
+[![Live](https://img.shields.io/badge/live-me.hoelee.com-0b4a6f)](https://me.hoelee.com)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
 
-An interactive animated resume template built with Vue 3 and Vite.
+## What this is
 
-## Quick Start
+An animated developer profile: the page types its own stylesheet in a code editor on the left while
+rendering the resume on the right, then finishes with a thank-you / contact panel.
 
-1. Click **Use this template** on GitHub, or clone the repository:
+It's a personal site — the content is my resume, not a reusable template. The *technique* is adapted
+from [jirengu-inc/animating-resume](https://github.com/jirengu-inc/animating-resume) (Apache-2.0);
+see Credits.
 
-   ```bash
-   git clone https://github.com/hoelee/hoelee-profile.git
-   cd hoelee-profile
-   ```
-
-2. Install dependencies:
-
-   ```bash
-   npm install
-   ```
-
-3. Edit `src/config/profile.js` and fill in your name, bio, skills, and contact information.
-
-4. Start a local preview at <http://localhost:8080>:
-
-   ```bash
-   npm run dev
-   ```
-
-5. Create a production build in `dist/`:
-
-   ```bash
-   npm run build
-   ```
-
-6. Deploy `dist/` to Netlify, Vercel, GitHub Pages, or any static host.
-
-## Typing Speed
-
-Set `typingSpeed` in `src/config/profile.js` to control the milliseconds per character. `1` is fastest; `20` creates a slow, dramatic effect.
-
-## Project Structure
-
-| Path | Purpose |
-| --- | --- |
-| `src/App.vue` | Desktop animated profile |
-| `src/Mobile.vue` | Mobile animated profile |
-| `src/config/profile.js` | Personal details, Markdown, animation speed, and typed CSS |
-| `src/main.js` | Responsive application entry point |
-| `src/components/` | Resume, style, and thank-you editors |
-| `src/assets/` | Reset stylesheet and static assets |
-| `public/robots.txt` | SEO crawler directives |
-
-## Deployment
-
-| Platform | Approach |
-| --- | --- |
-| GitHub Pages | [hoelee.github.io/hoelee-profile](https://hoelee.github.io/hoelee-profile/) — auto-deploys via GitHub Actions on every push to `main`. |
-| Netlify | Build with `npm run build` and publish `dist/`. |
-| Vercel | Import the repository; Vite settings are detected automatically. |
-| Static server | Upload the contents of `dist/` to any static web server. |
-
-`public/robots.txt` is pre-included for SEO and is copied into the production build.
-
-## Tech Stack
+## Tech stack
 
 | Technology | Role |
 | --- | --- |
 | Vue 3 | UI framework |
-| Vite | Development server and build tool |
-| Prism.js | Syntax highlighting |
-| marked.js | Markdown rendering |
+| Vite 6 | Dev server and build tool |
+| Prism.js | Syntax highlighting in the code panel |
+| marked | Markdown → HTML rendering |
 
-## License
+## Project structure
 
-Licensed under [Apache-2.0](LICENSE).
+| Path | Purpose |
+| --- | --- |
+| `src/App.vue` | Desktop layout — orchestrates the typewriter sequence |
+| `src/Mobile.vue` | Mobile layout (used when viewport ≤ 500px) |
+| `src/config/profile.js` | **All content lives here** — details, Markdown, animation speed, typed CSS |
+| `src/components/StyleEditor.vue` | Left panel: highlighted, self-typing CSS |
+| `src/components/ResumeEditor.vue` | Right panel: resume markdown → HTML |
+| `src/components/ThankEditor.vue` | Footer: thank-you / contact panel |
+| `src/main.js` | Entry point, picks desktop vs mobile |
+| `src/assets/reset.css` | Reset + border-box baseline |
+| `public/robots.txt` | Crawler directives (copied into the build) |
+
+## Editing the content
+
+Everything you'd want to change is in `src/config/profile.js`:
+
+- `name`, `title` — identity and headline
+- `typingSpeed` — ms per character (`1` = near-instant, `20` = slow and dramatic)
+- `resumeMarkdown` — the resume body
+- `thanksMarkdown` — the thank-you / contact panel
+- `desktopStyles` / `mobileStyles` — **arrays** of CSS strings, typed in sequence
+
+> **Note on the CSS arrays.** Each array is typed in order and every stage is *appended to the same
+> injected `<style>` tag*. Because they all end up in one stylesheet, a later stage's shorthand
+> (e.g. `margin: 0 auto`) overrides an earlier stage's longhand (`margin-top: 1em`). Keep the final
+> visual values in the **last** stage of each array — that is what wins.
+
+## Development
+
+```bash
+npm install
+npm run dev      # http://localhost:8080
+npm run build    # outputs to dist/
+npm run preview  # serve the production build locally
+```
+
+Requires Node ≥ 18 (built and tested on Node 24).
+
+## Deployment
+
+Pushed to **Gitea only** — `git.hoelee.com/hoelee/hoelee-profile`. There is no GitHub mirror.
+
+`me.hoelee.com` is served by an `nginx:alpine` container (`nginx-me.hoelee.com`) on the VPS at
+`41.216.187.102`, behind Traefik. The container mounts the built site read-only:
+
+| Host path | Container path |
+| --- | --- |
+| `/docker/web/me.hoelee.com/public` | `/var/www/html` |
+| `/docker/web/me.hoelee.com/nginx/default.conf` | `/etc/nginx/conf.d/default.conf` |
+
+To deploy a new build:
+
+```bash
+npm run build
+rsync -av --delete dist/ root@41.216.187.102:/docker/web/me.hoelee.com/public/
+```
+
+The site is static — no PHP or database is used. The `php:9000` upstream in the nginx config is a
+leftover from the shared web template and is not needed by this site.
 
 ## Credits
 
-This project is inspired by and credits [jirengu-inc/animating-resume](https://github.com/jirengu-inc/animating-resume) — the original animated resume project by jirengu-inc.
+Adapted from [jirengu-inc/animating-resume](https://github.com/jirengu-inc/animating-resume) by
+jirengu-inc — the original animated resume project.
+
+## License
+
+[Apache-2.0](LICENSE).

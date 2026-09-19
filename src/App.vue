@@ -37,17 +37,28 @@
     },
     methods: {
       makeResume: async function () {
-        await this.progressivelyShowStyle(0)
+        // Type every stage of the stylesheet in order. The original code called
+        // progressivelyShowStyle(1) three times between steps, but that call is
+        // idempotent once the cumulative-length guard is satisfied, so stages 2
+        // and 3 were never typed and the whole .thankEditor stylesheet (padding,
+        // link colours, box layout) was missing from the injected <style> tag.
+        for (let n = 0; n < this.fullStyle.length; n++) {
+          await this.progressivelyShowStyle(n)
+        }
+        // Type the resume body while it is still plain text, then swap to
+        // rendered HTML. The swap must happen AFTER both text passes, otherwise
+        // `enableHtml` flips early and both panels render empty markdown.
         await this.progressivelyShowResume()
-        await this.progressivelyShowStyle(1)
-        await this.showHtml()
-        await this.progressivelyShowStyle(1)
         await this.progressivelyShowThanks()
-        await this.progressivelyShowStyle(1)
+        await this.showHtml()
       },
       showHtml() {
         return new Promise((resolve) => {
           this.enableHtml = true
+          this.$nextTick(() => {
+            if (this.$refs.resumeEditor) this.$refs.resumeEditor.goTop()
+            if (this.$refs.thankEditor) this.$refs.thankEditor.goTop()
+          })
           resolve()
         })
       },
@@ -120,10 +131,6 @@
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  }
-
-  html {
-    min-height: 100vh;
   }
 
   * {
