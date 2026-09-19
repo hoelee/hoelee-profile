@@ -2,11 +2,14 @@ export default {
   // Personal info
   name: 'Mr. Hoelee',
   title: 'Full Stack Engineer · AI & Automation · DevOps',
-  githubUrl: 'https://git.hoelee.com/hoelee',
+  githubUrl: 'https://github.com/hoelee/hoelee-profile',
+  giteaUrl: 'https://git.hoelee.com/hoelee',
 
-  // Animation speed (ms per character typed)
-  // Lower = faster. Recommended range: 1 (instant) to 20 (dramatic slow)
+  // Animation speed — per-tick delay (ms) and characters written per tick.
+  // Effective speed = typingSpeed / charsPerTick. Lower delay = faster;
+  // higher charsPerTick = fewer setTimeout hops = much faster and smoother.
   typingSpeed: 1,
+  charsPerTick: 5,
 
   // Resume content in Markdown
   resumeMarkdown: `Mr. Hoelee (Lee Teong Hoe)
@@ -90,7 +93,8 @@ The best fit is a team that needs one person who can own the whole stack: backen
 
 * WhatsApp  → [+6012-7972969](https://wa.me/60127972969)
 * Email  → [me@hoelee.com](mailto:me@hoelee.com)
-* GitHub  → [git.hoelee.com/hoelee](https://git.hoelee.com/hoelee)
+* Gitea  → [git.hoelee.com/hoelee](https://git.hoelee.com/hoelee)
+* GitHub  → [github.com/hoelee](https://github.com/hoelee/)
 * Based in Perak, Malaysia — remote-friendly, open to hybrid in Malaysia
 
 Where I can contribute:
@@ -105,6 +109,7 @@ Where I can contribute:
   desktopStyles: [
     `/*
  * Gitea: https://git.hoelee.com/hoelee
+ * GitHub: https://github.com/hoelee
  * Hi, I'm Mr. Hoelee — Full Stack Engineer, AI & Automation, DevOps
  * Let me create an animated resume!
  */
@@ -120,11 +125,11 @@ html {
 #content{
   height:70vh;
   margin:0;
+  overflow: hidden;
 }
 #foot{
-  height:30vh;
+  min-height:30vh;
   margin:0;
-  overflow: hidden;
 }
 
 /* Set border */
@@ -208,14 +213,14 @@ html{
  * Thanks for everyone's attention.
  */
 .styleEditor{
-    width: calc(49vw - 1em);
+    width: calc(50vw - 1em);
     height:70vh;
-    margin-left:1vw;
+    margin-left:.5em;
 }
 .resumeEditor{
-   width: calc(49vw - 1em);
+   width: calc(50vw - 1em);
    height:70vh;
-   margin-right:1vw;
+   margin-right:.5em;
 }
 
 .thankEditor{
@@ -250,9 +255,10 @@ html{
 }
 
 .thankEditor {
-  width: 99vw; height: calc(30vh - 1.5em);
+  width: 99vw; min-height: calc(30vh - 1.5em);
   border: 1px solid #ccc;
   font-size: .9em;
+  overflow: visible;
 }
 `,`
 .thankEditor{
@@ -276,18 +282,19 @@ html{
 }
 
 .thankEditor{
-  width: 95vw; 
-  height: calc(30vh - 1.5em);
+  width: 95vw;
+  min-height: calc(30vh - 1.5em);
   margin: .5em auto;
   padding: 1.25em 1.75em;
   box-sizing: border-box;
+  overflow: visible;
   -webkit-transition: none;
   transition: none;
   -webkit-transform: rotateX(-10deg) translateZ(-200px);
           transform: rotateX(-10deg) translateZ(-200px);
 }
 
-/* keep the page itself from ever scrolling */
+/* keep horizontal scrolling off; allow vertical scroll when short */
 body{
   overflow-x: hidden;
 }
@@ -297,6 +304,7 @@ body{
   mobileStyles: [
     `/*
  * Gitea: https://git.hoelee.com/hoelee
+ * GitHub: https://github.com/hoelee
  * Hi, I'm Mr. Hoelee — Full Stack Engineer, AI & Automation, DevOps
  * Let me create an animated resume!
  */
@@ -315,9 +323,10 @@ html {
   padding: .5em;
   border: 1px solid;
   overflow: auto;
-  width: 96vw;
+  width: 94vw;
   margin: 2.3vh 2vw;
   height: 90vh;
+  box-sizing: border-box;
 }
 /* Too short */
 .styleEditor {
@@ -342,19 +351,20 @@ html{
   perspective: 1000px;
 }
 .styleEditor {
-  position: fixed; left: 0; top: 0;
+  position: absolute; left: 0; top: 0;
   transform: rotateX(-10deg) translateZ(-50px) ;
 }
 
 /* Prepare an editor */
 .resumeEditor{
-  position: fixed;
-  top: 48%; left: 0;
+  position: relative;
+  top: 47vh; left: 0;
   padding: .5em;  margin: 1.5vh;
   width: 94vw; height: 48.5vh;
   border: 1px solid;
   background: white; color: #222;
   overflow: auto;
+  box-sizing: border-box;
 }
 /* Start writing resume */
 
@@ -414,9 +424,43 @@ html{
 .resumeEditor a:hover {
   text-decoration: underline;
 }
-/* keep the page itself from ever scrolling */
-html, body{
+
+/* Thank-you panel below the resume, full width */
+.thankEditor {
+  position: relative;
+  width: 94vw;
+  margin: 2vh auto;
+  padding: 1.25em 1.25em;
+  box-sizing: border-box;
+  background: #E9D9BB;
+  color: #001C42;
+  overflow: auto;
+  border: 1px solid #ccc;
+  font-size: .9em;
+}
+.thankEditor h2 {
+  margin-top: 0;
+  padding-bottom: .35em;
+  border-bottom: 2px solid rgba(0,28,66,.35);
+}
+.thankEditor a {
+  color: #0b4a6f;
+  font-weight: 600;
+}
+.thankEditor ul, .thankEditor ol {
+  list-style: none;
+  padding-left: .25em;
+}
+.thankEditor ul > li::before {
+  content: '☞';
+  color: #0b4a6f;
+  margin-right: .5em;
+}
+
+/* allow vertical scroll, never horizontal */
+html, body {
   overflow-x: hidden;
+  overflow-y: auto;
   max-width: 100%;
 }
 `]

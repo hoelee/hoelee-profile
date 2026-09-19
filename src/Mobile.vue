@@ -2,6 +2,7 @@
   <div id="app">
     <StyleEditor ref="styleEditor" :code="currentStyle"></StyleEditor>
     <ResumeEditor ref="resumeEditor" :markdown="currentMarkdown" :enableHtml="enableHtml"></ResumeEditor>
+    <ThankEditor ref="thankEditor" :markdown="currentThankMarkdown" :enableHtml="enableHtml"></ThankEditor>
   </div>
 </template>
 
@@ -9,19 +10,24 @@
   import profile from './config/profile.js'
   import StyleEditor from './components/StyleEditor.vue'
   import ResumeEditor from './components/ResumeEditor.vue'
+  import ThankEditor from './components/ThankEditor.vue'
   import './assets/reset.css'
 
   export default {
     name: 'app',
-    components: { StyleEditor, ResumeEditor },
+    components: { StyleEditor, ResumeEditor, ThankEditor },
     data() {
       return {
         interval: profile.typingSpeed,
+        charsPerTick: profile.charsPerTick,
         fullStyle: profile.mobileStyles,
         fullMarkdown: profile.resumeMarkdown,
+        thanksMarkdown: profile.thanksMarkdown,
         currentStyle: '',
         currentMarkdown: '',
-        enableHtml: false
+        currentThankMarkdown: '',
+        enableHtml: false,
+        styleFull: profile.mobileStyles.join('')
       }
     },
     created() {
@@ -29,58 +35,88 @@
     },
     methods: {
       makeResume: async function () {
-        await this.progressivelyShowStyle(0)
-        await this.progressivelyShowResume()
-        await this.progressivelyShowStyle(1)
+        await this.typeStyleUpToMarker('/* Start writing resume */')
         await this.showHtml()
-        await this.progressivelyShowStyle(1)
+        await this.typeStyleRemaining()
+        await this.progressivelyShowThanks()
+      },
+      typeStyleUpToMarker(marker) {
+        return new Promise((resolve) => {
+          const markerIdx = this.styleFull.indexOf(marker)
+          const target = markerIdx >= 0 ? markerIdx + marker.length : this.styleFull.length
+          this.progressivelyShowStylePartial(target, resolve)
+        })
+      },
+      typeStyleRemaining() {
+        return new Promise((resolve) => {
+          this.progressivelyShowStyleAll(resolve)
+        })
       },
       showHtml() {
         return new Promise((resolve) => {
           this.enableHtml = true
-          this.$nextTick(() => this.$refs.resumeEditor.goTop())
-          resolve()
-        })
-      },
-      progressivelyShowStyle(n) {
-        return new Promise((resolve) => {
-          const interval = this.interval
-          const showStyle = (() => {
-            const style = this.fullStyle[n]
-            if (!style) return
-            const length = this.fullStyle.filter((_, index) => index <= n).map((item) => item.length).reduce((p, c) => p + c, 0)
-            const prefixLength = length - style.length
-            if (this.currentStyle.length < length) {
-              const l = this.currentStyle.length - prefixLength
-              this.currentStyle += style.substring(l, l + 1) || ' '
-              if (style.substring(l - 1, l) === '\n' && this.$refs.styleEditor) {
-                this.$nextTick(() => this.$refs.styleEditor.goBottom())
-              }
-              setTimeout(showStyle, interval)
-            } else {
-              resolve()
-            }
+          this.$nextTick(() => {
+            if (this.$refs.resumeEditor) this.$refs.resumeEditor.goTop()
+            resolve()
           })
-          showStyle()
         })
       },
-      progressivelyShowResume() {
+      progressivelyShowStyleAll(resolve) {
+        const total = this.styleFull.length
+        const step = this.increment(total)
+        const tick = () => {
+          if (this.currentStyle.length < total) {
+            step()
+            setTimeout(tick, this.interval)
+          } else {
+            resolve()
+          }
+        }
+        tick()
+      },
+      progressivelyShowStylePartial(target, resolve) {
+        const step = this.increment(target)
+        const tick = () => {
+          if (this.currentStyle.length < target) {
+            step()
+            setTimeout(tick, this.interval)
+          } else {
+            resolve()
+          }
+        }
+        tick()
+      },
+      increment(total) {
+        const cpt = this.charsPerTick
+        return () => {
+          const cur = this.currentStyle.length
+          if (cur >= total) return
+          const end = Math.min(total, cur + cpt)
+          const slice = this.styleFull.substring(cur, end)
+          this.currentStyle += slice
+          if (slice.includes('\n') && this.$refs.styleEditor) {
+            this.$nextTick(() => this.$refs.styleEditor.goBottom())
+          }
+        }
+      },
+      progressivelyShowThanks() {
         return new Promise((resolve) => {
-          const length = this.fullMarkdown.length
+          const length = this.thanksMarkdown.length
           const interval = this.interval
-          const showResume = () => {
-            if (this.currentMarkdown.length < length) {
-              this.currentMarkdown = this.fullMarkdown.substring(0, this.currentMarkdown.length + 1)
-              const prevChar = this.currentMarkdown[this.currentMarkdown.length - 2]
-              if (prevChar === '\n' && this.$refs.resumeEditor) {
-                this.$nextTick(() => this.$refs.resumeEditor.goBottom())
-              }
-              setTimeout(showResume, interval)
+          const cpt = this.charsPerTick
+          const showThanks = () => {
+            if (this.currentThankMarkdown.length < length) {
+              this.currentThankMarkdown = this.thanksMarkdown.substring(0, Math.min(length, this.currentThankMarkdown.length + cpt))
+              this.$nextTick(() => {
+                // Keep the newly revealed thanks section in view as it grows.
+                window.scrollTo(0, document.body.scrollHeight)
+              })
+              setTimeout(showThanks, interval)
             } else {
               resolve()
             }
           }
-          showResume()
+          showThanks()
         })
       }
     }

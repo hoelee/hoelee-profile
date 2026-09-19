@@ -23,13 +23,17 @@
     data() {
       return {
         interval: profile.typingSpeed,
+        charsPerTick: profile.charsPerTick,
         fullStyle: profile.desktopStyles,
         fullMarkdown: profile.resumeMarkdown,
         thanksMarkdown: profile.thanksMarkdown,
         currentStyle: '',
         currentMarkdown: '',
         currentThankMarkdown: '',
-        enableHtml: false
+        enableHtml: false,
+        htmlShown: false,
+        thanksShown: false,
+        styleFull: profile.desktopStyles.join('')
       }
     },
     created() {
@@ -37,79 +41,101 @@
     },
     methods: {
       makeResume: async function () {
-        // Type every stage of the stylesheet in order. The original code called
-        // progressivelyShowStyle(1) three times between steps, but that call is
-        // idempotent once the cumulative-length guard is satisfied, so stages 2
-        // and 3 were never typed and the whole .thankEditor stylesheet (padding,
-        // link colours, box layout) was missing from the injected <style> tag.
-        for (let n = 0; n < this.fullStyle.length; n++) {
-          await this.progressivelyShowStyle(n)
-        }
-        // Type the resume body while it is still plain text, then swap to
-        // rendered HTML. The swap must happen AFTER both text passes, otherwise
-        // `enableHtml` flips early and both panels render empty markdown.
-        await this.progressivelyShowResume()
-        await this.progressivelyShowThanks()
+        // Both editors appear (background + borders), then the CSS types in the
+        // left pane. During this the right pane is NOT blank: the resume editor
+        // renders its content as it goes, so there is never a long empty wait.
+        await this.typeStyleUpToMarker('/* Start writing resume */')
+
+        // Render the resume right after the marker, before the remaining CSS.
         await this.showHtml()
+
+        // Type the rest of the stylesheet, then show the bottom panel once it is
+        // fully styled so it never sits half-drawn for a long time.
+        await this.typeStyleRemaining()
+        await this.showThanks()
+        await this.progressivelyShowThanks()
+      },
+      typeStyleUpToMarker(marker) {
+        return new Promise((resolve) => {
+          const markerIdx = this.styleFull.indexOf(marker)
+          const target = markerIdx >= 0 ? markerIdx + marker.length : this.styleFull.length
+          this.progressivelyShowStylePartial(target, resolve)
+        })
+      },
+      typeStyleRemaining() {
+        return new Promise((resolve) => {
+          this.progressivelyShowStyleAll(resolve)
+        })
       },
       showHtml() {
         return new Promise((resolve) => {
           this.enableHtml = true
           this.$nextTick(() => {
             if (this.$refs.resumeEditor) this.$refs.resumeEditor.goTop()
+            this.htmlShown = true
+            resolve()
+          })
+        })
+      },
+      showThanks() {
+        return new Promise((resolve) => {
+          this.thanksShown = true
+          this.$nextTick(() => {
             if (this.$refs.thankEditor) this.$refs.thankEditor.goTop()
+            resolve()
           })
-          resolve()
         })
       },
-      progressivelyShowStyle(n) {
-        return new Promise((resolve) => {
-          const interval = this.interval
-          const showStyle = (() => {
-            const style = this.fullStyle[n]
-            if (!style) return
-            const length = this.fullStyle.filter((_, index) => index <= n).map((item) => item.length).reduce((p, c) => p + c, 0)
-            const prefixLength = length - style.length
-            if (this.currentStyle.length < length) {
-              const l = this.currentStyle.length - prefixLength
-              this.currentStyle += style.substring(l, l + 1) || ' '
-              if (style.substring(l - 1, l) === '\n' && this.$refs.styleEditor) {
-                this.$nextTick(() => this.$refs.styleEditor.goBottom())
-              }
-              setTimeout(showStyle, interval)
-            } else {
-              resolve()
-            }
-          })
-          showStyle()
-        })
-      },
-      progressivelyShowResume() {
-        return new Promise((resolve) => {
-          const length = this.fullMarkdown.length
-          const interval = this.interval
-          const showResume = () => {
-            if (this.currentMarkdown.length < length) {
-              this.currentMarkdown = this.fullMarkdown.substring(0, this.currentMarkdown.length + 1)
-              const prevChar = this.currentMarkdown[this.currentMarkdown.length - 2]
-              if (prevChar === '\n' && this.$refs.resumeEditor) {
-                this.$nextTick(() => this.$refs.resumeEditor.goBottom())
-              }
-              setTimeout(showResume, interval)
-            } else {
-              resolve()
-            }
+      // Type the entire style array from whatever is already typed, writing
+      // charsPerTick characters per tick.
+      progressivelyShowStyleAll(resolve) {
+        const total = this.styleFull.length
+        const step = this.increment(total)
+        const tick = () => {
+          if (this.currentStyle.length < total) {
+            step()
+            setTimeout(tick, this.interval)
+          } else {
+            resolve()
           }
-          showResume()
-        })
+        }
+        tick()
+      },
+      progressivelyShowStylePartial(target, resolve) {
+        const step = this.increment(target)
+        const tick = () => {
+          if (this.currentStyle.length < target) {
+            step()
+            setTimeout(tick, this.interval)
+          } else {
+            resolve()
+          }
+        }
+        tick()
+      },
+      // Returns a function that writes `charsPerTick` characters per call and
+      // keeps the code pane scrolled to the newly typed line.
+      increment(total) {
+        const cpt = this.charsPerTick
+        return () => {
+          const cur = this.currentStyle.length
+          if (cur >= total) return
+          const end = Math.min(total, cur + cpt)
+          const slice = this.styleFull.substring(cur, end)
+          this.currentStyle += slice
+          if (slice.includes('\n') && this.$refs.styleEditor) {
+            this.$nextTick(() => this.$refs.styleEditor.goBottom())
+          }
+        }
       },
       progressivelyShowThanks() {
         return new Promise((resolve) => {
           const length = this.thanksMarkdown.length
           const interval = this.interval
+          const cpt = this.charsPerTick
           const showThanks = () => {
             if (this.currentThankMarkdown.length < length) {
-              this.currentThankMarkdown = this.thanksMarkdown.substring(0, this.currentThankMarkdown.length + 1)
+              this.currentThankMarkdown = this.thanksMarkdown.substring(0, Math.min(length, this.currentThankMarkdown.length + cpt))
               const prevChar = this.currentThankMarkdown[this.currentThankMarkdown.length - 2]
               if (prevChar === '\n' && this.$refs.thankEditor) {
                 this.$nextTick(() => this.$refs.thankEditor.goBottom())
