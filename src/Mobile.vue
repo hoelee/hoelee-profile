@@ -54,6 +54,7 @@
       },
       showHtml() {
         return new Promise((resolve) => {
+          this.currentMarkdown = this.fullMarkdown
           this.enableHtml = true
           this.$nextTick(() => {
             if (this.$refs.resumeEditor) this.$refs.resumeEditor.goTop()

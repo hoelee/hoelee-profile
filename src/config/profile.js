@@ -347,19 +347,17 @@ html {
 }
 
 /* Add 3D effect */
-html{
-  perspective: 1000px;
-}
 .styleEditor {
-  position: absolute; left: 0; top: 0;
-  transform: rotateX(-10deg) translateZ(-50px) ;
+  position: relative; left: 0; top: 0;
+  margin: 2.3vh 2vw;
 }
 
 /* Prepare an editor */
 .resumeEditor{
   position: relative;
-  top: 47vh; left: 0;
-  padding: .5em;  margin: 1.5vh;
+  left: 0;
+  padding: .5em;
+  margin: 2.3vh 2vw;
   width: 94vw; height: 48.5vh;
   border: 1px solid;
   background: white; color: #222;

@@ -69,6 +69,9 @@
       },
       showHtml() {
         return new Promise((resolve) => {
+          // The resume renders in full now (no more slow typing) — populate the
+          // full markdown so the HTML render has content.
+          this.currentMarkdown = this.fullMarkdown
           this.enableHtml = true
           this.$nextTick(() => {
             if (this.$refs.resumeEditor) this.$refs.resumeEditor.goTop()
