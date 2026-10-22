@@ -67,3 +67,4 @@ NUL
 # Deployment platform state (uncomment if used)
 # .netlify/
 # .vercel/
+.codegraph/
