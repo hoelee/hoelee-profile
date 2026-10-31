@@ -1,7 +1,7 @@
 export default {
   // Personal info
   name: 'Mr. Hoelee',
-  title: 'Full Stack Engineer · AI & Automation · DevOps',
+  title: 'Senior Full-Stack, DevOps & AI Systems Engineer',
   githubUrl: 'https://github.com/hoelee/hoelee-profile',
   giteaUrl: 'https://git.hoelee.com/hoelee',
 
@@ -14,70 +14,79 @@ export default {
   // Resume content in Markdown
   resumeMarkdown: `Mr. Hoelee (Lee Teong Hoe)
 ====
-Full Stack Engineer with ~10 years building production web systems — PHP/CodeIgniter and Java/Spring backends, relational data layers, and the Docker infrastructure that runs them.
-I work end to end: gather the requirements, design the schema and APIs, build the app, deploy it, and keep it running in production.
-Recent focus is AI and automation — LLM-backed assistants, OCR document verification, and workflow automation that removes manual work from real business processes.
+Senior Full-Stack, DevOps & AI Systems Engineer with 10+ years delivering enterprise software, distributed architectures, and autonomous AI systems.
+End-to-end ownership from requirements, architecture, and database design through deployment, monitoring, and ongoing production support.
+Independently designed and operates a 3-host production platform (162 Docker containers across Synology DSM, unRaid, and Ubuntu VPS) running live services at >99% uptime.
 
 About Me
 ----
-I'm a hands-on engineer who likes owning a system from the first requirement to production support.
-Day to day that means CodeIgniter and Spring Boot services, WordPress builds for clients, and a self-hosted Docker stack of 30+ services (reverse proxy, SSO, databases, monitoring, backups, automation) that I run and maintain myself.
-I'm comfortable being the only technical person on a project: talking to the client, making the architecture call, writing the code, and handling the production incident.
-I use AI as a working tool — coding assistants, local LLMs, and automation pipelines — to move faster without lowering the quality bar.
+I am a hands-on engineer who likes owning a system from the first requirement to production support.
+Day to day that combines enterprise Java Spring Boot and PHP (CodeIgniter/modern) services, custom business architectures, and a self-managed 162-container Linux/Docker infrastructure covering Traefik reverse proxies, Authentik OIDC SSO, PostgreSQL/MySQL replication, and automated backup pipelines.
+I operate autonomous AI systems in production: agent runtimes (Hermes Agent, Model Context Protocol - MCP), LLM integration with strict human-in-the-loop gates, local GPU inference (RTX 3060 12GB: LM Studio, llama.cpp, whisper.cpp, ComfyUI), and deterministic-first automation loops.
+Creator of Keygate (offline Ed25519 cryptographic software licensing engine) and Digi Kedai (e-commerce automation agent).
 
 Core Skills
 ----
-  - Languages: PHP, Java, JavaScript, SQL, Python (scripting), Bash
-  - Backend & Frameworks: CodeIgniter 4, Spring Boot, Spring Data JPA / Hibernate, REST API design, WordPress plugin development
-  - Databases: MySQL, PostgreSQL, SQL Server, SQLite, Redis, Elasticsearch, Memcached
-  - Frontend: HTML5, CSS3, JavaScript, Vue 3, jQuery, Bootstrap, responsive UI
-  - DevOps & Infrastructure: Docker, Docker Compose, Portainer, Traefik, Nginx, IIS, Cloudflare, Linux (Ubuntu/Debian), Windows Server, Synology DSM, unRAID
-  - AI & Automation: OpenAI API, LLM integration, prompt engineering, OCR pipelines, IBM Watson Assistant, n8n, local LLM inference (LM Studio, llama.cpp)
-  - Tooling: Git (Gitea/GitHub/GitLab), VS Code, NetBeans, Postman, Chrome extension development
+  - Languages: PHP, Java, Python, JavaScript, TypeScript, SQL, Bash, Solidity
+  - Backend & APIs: Spring Boot, CodeIgniter 4, Node.js, REST API Architecture, Webhooks, Queue & Worker Patterns, Cron Loops, Transactional Email (Postfix/Dovecot/DKIM)
+  - Databases & Storage: PostgreSQL, MySQL / MariaDB, MySQL Master/Replica, SQLite (WAL mode), Redis
+  - DevOps & Infrastructure: Docker, Docker Compose, Portainer, Traefik (custom bot filter, automated ACME TLS), Nginx, Cloudflare, Linux (Debian/Ubuntu), Synology DSM, unRaid, Gitea Actions CI/CD, restic automated backups, Prometheus / Grafana / cAdvisor monitoring
+  - AI & Autonomous Agents: Hermes Agent, Model Context Protocol (MCP), OpenAI API, LLM Integration, LiteLLM, n8n, OCR receipt verification, Local LLM Inference (LM Studio, llama.cpp GGUF), ComfyUI, whisper.cpp STT
+  - Security & Identity: Authentik (OIDC / OAuth2 SSO), Passbolt, Ed25519 Cryptography, Fail2ban, Secret Management
+  - Frontend: JavaScript, TypeScript, Vue 3 + Vite, React (component practice), HTML5/CSS3, Responsive UI
+  - Tooling: Git (Self-Hosted Gitea, GitHub), VS Code, Playwright CDP automation, Postman
 
 Selected Projects
 ----
-  - DigiKedai AI customer-support bot — multi-channel (Telegram + WhatsApp) support bot in TypeScript, LiteLLM + PostgreSQL, containerised on NAS behind a Cloudflare tunnel webhook.
-  - OCR invoice verification + AI customer service — replaces manual data entry by extracting and validating receipt fields, with an LLM layer drafting replies.
-  - Real-time GPS delivery tracking platform — live order and driver tracking with automated dispatch and scheduling; included the rider-side Android app.
-  - Self-hosted production infrastructure — 30+ Docker services across NAS and VPS: Traefik reverse proxy with custom bot-filter middleware, authentik SSO, PostgreSQL/MySQL, backups, monitoring and automation.
-  - Digital product catalogue + delivery system — NocoDB catalogue, n8n-backed single-use access links, and per-download logging for digital goods sales.
-  - Numerology report engine (CodeIgniter 4) — print-ready A4 report generation staged for token-gated PDF delivery.
-  - Client web builds — 30+ delivered SME, NGO and e-commerce sites on WordPress (Kadence, Elementor, JetEngine) plus custom PHP applications.
+  - 162-Container Production Infrastructure — 3-host self-managed platform (Synology DSM, unRaid, Ubuntu 24.04 VPS) running 78+ compose stacks: Traefik reverse proxy fleet, Authentik SSO, Gitea Actions CI/CD, MySQL master/replica replication, and automated backups at >99% uptime.
+  - Keygate Offline Software Licensing Engine — Standalone cryptographic licensing engine using Ed25519 signatures, machine hardware fingerprinting (CPU, BIOS, motherboard UUID), and anti-tamper counters with zero phone-home requirement.
+  - Digi Kedai E-Commerce & Customer-Support Agent — Multi-channel (Telegram + WhatsApp) transactional agent bot in TypeScript, LiteLLM, persistent user memory (mem0), and automated payment webhook verification.
+  - www.hoelee.com & linkd — Modern Astro 5 SSG personal hub (0 KB client JavaScript, Lighthouse mobile score 99, 0ms TBT) backed by linkd, a lightweight Node.js SQLite WAL shortlink engine with Authentik SSO admin.
+  - Client Enterprise Systems & Web Builds — Delivered 30+ production websites and business systems for SME, NGO, and e-commerce clients across full lifecycles (requirements, architecture, code, deployment, ongoing maintenance).
+  - Real-Time GPS Delivery Tracking Platform — Enterprise Java Spring Boot backend and Android app for real-time delivery tracking, live mapping, and automated dispatch.
 
 Experience
 ----
-  Full Stack Software Engineer — Joywood, Perak, Malaysia (2020 – Present)
-  - Delivered 30+ production websites and business systems for SME, NGO and e-commerce clients, owning each from requirements through deployment and support.
-  - Built AI features into client products: OpenAI-backed assistants, OCR data capture, chatbots and workflow automation.
-  - Developed and maintained PHP (CodeIgniter) applications, WordPress plugins and Java Spring Boot services.
-  - Designed and operated the self-hosted Docker infrastructure (30+ services) covering auth, monitoring, backup, databases, automation and reverse proxying.
+  Full Stack Software Engineer — Joywood, Perak, Malaysia (Jan 2020 – Present)
+  - Delivered 30+ production websites and business systems for SME, NGO, and e-commerce clients, owning the full lifecycle from requirements through architecture, deployment, and support.
+  - Built AI-enabled customer support and workflow automation integrating the OpenAI API and OCR receipt verification, automating routine inquiries and manual data entry.
+  - Developed backend services and internal portals in PHP CodeIgniter and Java Spring Boot supporting billing, order processing, and customer operations.
+  - Designed and operate the three-host production infrastructure (162 containers across 78+ compose stacks) covering Traefik reverse proxies, Authentik SSO, Prometheus/Grafana monitoring, and automated backups.
+  - Automated ops pipelines and full-stack delivery in Python, orchestrating agentic coding workflows (Hermes Agent, MCP) with strict CI/CD and regression test gates.
 
-  Project Manager / Software Engineer — Edufly (2019 – 2020)
-  - Led development of an MLM e-commerce platform and integrated its payment gateway.
-  - Coordinated an external development team and managed delivery scope and timelines.
-  - Built Java Spring automation tools for Shopee bulk listing, product scraping and internal workflows.
-  - Integrated Telegram, WhatsApp, Facebook Messenger and web chat bots, plus email marketing automation.
+  Founder / Full Stack Developer — Hoelee Enterprise (SifuMail), Malaysia (Sep 2019 – Apr 2023)
+  - Founded and operated an independent web development and hosting practice delivering websites, custom web applications, and email hosting to Malaysian SMEs.
+  - Built and maintained client WordPress sites with Kadence, Elementor, JetEngine, and custom PHP plugins.
+  - Developed full-stack applications in PHP CodeIgniter, Java Spring Boot, and Node.js with modern JavaScript front ends.
+  - Administered multi-provider hosting across AWS EC2, Vultr, Exabytes, cPanel, and CyberPanel on Linux and Windows Server environments.
 
-  Software Engineer — Superceed (M) Sdn. Bhd., Remote (2016 – 2019)
-  - Enterprise Java Spring Boot web applications and Android apps.
-  - Real-time GPS delivery tracking platform with live map and automated customer assignment.
-  - IBM Watson Assistant chatbot, speech synthesis/recognition and face-recognition customer verification.
+  Project Manager / Software Engineer — EduFly, Malaysia (Aug 2018 – Sep 2019)
+  - Led development of an MLM-enabled e-commerce platform with multi-rail payment gateway integration.
+  - Coordinated an external development team while owning the internal technical implementation and delivery timeline.
+  - Built Java Spring automation tools for Shopee bulk listing, product sourcing, and order processing workflows.
+  - Developed chatbot integrations for Telegram, WhatsApp, Facebook Messenger, and web chat, plus email marketing automation.
 
-Education — Bachelor of Information System (Hons)
+  Software Engineer — Superceed (M) Sdn. Bhd., Remote (Nov 2015 – Jul 2018)
+  - Built enterprise Java Spring Boot web applications and Android apps supporting customer service and food-delivery operations.
+  - Developed a real-time GPS delivery-tracking platform for food-delivery logistics, improving dispatch visibility and automated order assignment.
+  - Implemented an IBM Watson Assistant chatbot automating routine customer-service conversations.
+  - Integrated Speech-to-Text, Text-to-Speech, and facial-recognition verification into enterprise workflows.
+  - Designed a Google Maps franchise territory management system, eliminating operational boundary disputes.
+
+Education — Bachelor of Information Systems (Hons)
 ----
   - Universiti Tunku Abdul Rahman (UTAR), Kampar, Malaysia
   - March 2016 | CGPA: 3.06 / 4.00 — Degree with Merit
-  - Certificate: [hoelee.com/cert](https://hoelee.com/cert)
+  - Verified Certificate: [hoelee.com/cert](https://hoelee.com/cert)
 
 Languages
 ----
 English | Malay | Mandarin | Cantonese | Hokkien
 
-Currently Learning
+Currently Exploring
 ----
-  - Solidity and smart-contract fundamentals (ERC-20 / ERC-721 with Foundry and Hardhat) — a side interest, not my day job.
-  - Local LLM inference and self-hosted AI tooling.
+  - Solidity and smart-contract development (ERC-20 / ERC-721 with Foundry and Hardhat) — self-directed exploration.
+  - Autonomous Agent runtimes, tool protocols (MCP), and local MoE model orchestration.
 
 
 `,
@@ -87,21 +96,23 @@ Currently Learning
 Thank you for reading!
 ----
 
-I'm open to full-time, contract and remote engineering roles — building and running web systems end to end.
+I'm open to Senior Full-Stack, Platform / DevOps, and AI Systems Engineering roles — building and operating reliable production systems end to end.
 
-The best fit is a team that needs one person who can own the whole stack: backend, frontend, deployment and production support.
+* WhatsApp / Call → [+601****5290](tel:+601****5290)
+* Email → [me@hoelee.com](mailto:me@hoelee.com)
+* Official Portfolio → [hoelee.com](https://www.hoelee.com/) · [hoelee.com/me](https://hoelee.com/me)
+* Verified CV & PDF → [doc.hoelee.com/cv.html](https://doc.hoelee.com/cv.html)
+* Deep-Dive Blog → [blog.hoelee.com](https://blog.hoelee.com/)
+* Self-Hosted Gitea → [git.hoelee.com](https://git.hoelee.com/)
+* GitHub Profile → [github.com/hoelee](https://github.com/hoelee/)
+* LinkedIn → [linkedin.com/in/hoelee](https://www.linkedin.com/in/hoelee/)
+* Location → Kuala Lumpur, Malaysia (Remote GMT+8 · Open to remote, hybrid, or on-site Malaysia)
 
-* WhatsApp  → [+6012-7972969](https://wa.me/60127972969)
-* Email  → [me@hoelee.com](mailto:me@hoelee.com)
-* Gitea  → [git.hoelee.com/hoelee](https://git.hoelee.com/hoelee)
-* GitHub  → [github.com/hoelee](https://github.com/hoelee/)
-* Based in Perak, Malaysia — remote-friendly, open to hybrid in Malaysia
-
-Where I can contribute:
-* Full stack application development (PHP/CodeIgniter, Java/Spring Boot, JavaScript)
-* AI and automation features — LLM assistants, OCR pipelines, workflow automation
-* DevOps and self-hosted infrastructure — Docker, reverse proxy, CI/CD, monitoring, backups
-* Taking existing systems in hand: maintenance, upgrades, performance and reliability
+Where I deliver immediate value:
+* Full-stack application architecture (Java Spring Boot, PHP CodeIgniter, TypeScript, Vue 3, PostgreSQL, SQLite WAL)
+* Autonomous AI Agents & automation workflows (Hermes Agent, MCP, LiteLLM, n8n, OCR, local GPU inference)
+* Self-hosted infrastructure & DevOps (Docker, Linux, Traefik, Authentik SSO, CI/CD, Prometheus/Grafana, restic)
+* Legacy system modernization, reliability hardening, and operational automation
 
   `,
 
@@ -110,7 +121,7 @@ Where I can contribute:
     `/*
  * Gitea: https://git.hoelee.com/hoelee
  * GitHub: https://github.com/hoelee
- * Hi, I'm Mr. Hoelee — Full Stack Engineer, AI & Automation, DevOps
+ * Hi, I'm Mr. Hoelee — Senior Full-Stack, DevOps & AI Systems Engineer
  * Let me create an animated resume!
  */
 
@@ -305,7 +316,7 @@ body{
     `/*
  * Gitea: https://git.hoelee.com/hoelee
  * GitHub: https://github.com/hoelee
- * Hi, I'm Mr. Hoelee — Full Stack Engineer, AI & Automation, DevOps
+ * Hi, I'm Mr. Hoelee — Senior Full-Stack, DevOps & AI Systems Engineer
  * Let me create an animated resume!
  */
 
