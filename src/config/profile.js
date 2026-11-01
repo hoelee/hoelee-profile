@@ -31,7 +31,7 @@ Core Skills
   - Backend & APIs: Spring Boot, CodeIgniter 4, Node.js, REST API Architecture, Webhooks, Queue & Worker Patterns, Cron Loops, Transactional Email (Postfix/Dovecot/DKIM)
   - Databases & Storage: PostgreSQL, MySQL / MariaDB, MySQL Master/Replica, SQLite (WAL mode), Redis
   - DevOps & Infrastructure: Docker, Docker Compose, Portainer, Traefik (custom bot filter, automated ACME TLS), Nginx, Cloudflare, Linux (Debian/Ubuntu), Synology DSM, unRaid, Gitea Actions CI/CD, restic automated backups, Prometheus / Grafana / cAdvisor monitoring
-  - AI & Autonomous Agents: Hermes Agent, Model Context Protocol (MCP), OpenAI API, LLM Integration, LiteLLM, n8n, OCR receipt verification, Local LLM Inference (LM Studio, llama.cpp GGUF), ComfyUI, whisper.cpp STT
+  - AI & Autonomous Agents: Hermes Agent, Model Context Protocol (MCP), OpenAI API, LLM Integration, OmniRoute gateway, n8n, OCR receipt verification, Local LLM Inference (LM Studio, llama.cpp GGUF), ComfyUI, whisper.cpp STT
   - Security & Identity: Authentik (OIDC / OAuth2 SSO), Passbolt, Ed25519 Cryptography, Fail2ban, Secret Management
   - Frontend: JavaScript, TypeScript, Vue 3 + Vite, React (component practice), HTML5/CSS3, Responsive UI
   - Tooling: Git (Self-Hosted Gitea, GitHub), VS Code, Playwright CDP automation, Postman
@@ -40,7 +40,7 @@ Selected Projects
 ----
   - 162-Container Production Infrastructure — 3-host self-managed platform (Synology DSM, unRaid, Ubuntu 24.04 VPS) running 78+ compose stacks: Traefik reverse proxy fleet, Authentik SSO, Gitea Actions CI/CD, MySQL master/replica replication, and automated backups at >99% uptime.
   - Keygate Offline Software Licensing Engine — Standalone cryptographic licensing engine using Ed25519 signatures, machine hardware fingerprinting (CPU, BIOS, motherboard UUID), and anti-tamper counters with zero phone-home requirement.
-  - Digi Kedai E-Commerce & Customer-Support Agent — Multi-channel (Telegram + WhatsApp) transactional agent bot in TypeScript, LiteLLM, persistent user memory (mem0), and automated payment webhook verification.
+  - Digi Kedai E-Commerce & Customer-Support Agent — Multi-channel (Telegram + WhatsApp) transactional agent bot in TypeScript, OmniRoute gateway, persistent user memory (mem0), and automated payment webhook verification.
   - www.hoelee.com & linkd — Modern Astro 5 SSG personal hub (0 KB client JavaScript, Lighthouse mobile score 99, 0ms TBT) backed by linkd, a lightweight Node.js SQLite WAL shortlink engine with Authentik SSO admin.
   - Client Enterprise Systems & Web Builds — Delivered 30+ production websites and business systems for SME, NGO, and e-commerce clients across full lifecycles (requirements, architecture, code, deployment, ongoing maintenance).
   - Real-Time GPS Delivery Tracking Platform — Enterprise Java Spring Boot backend and Android app for real-time delivery tracking, live mapping, and automated dispatch.
@@ -110,7 +110,7 @@ I'm open to Senior Full-Stack, Platform / DevOps, and AI Systems Engineering rol
 
 Where I deliver immediate value:
 * Full-stack application architecture (Java Spring Boot, PHP CodeIgniter, TypeScript, Vue 3, PostgreSQL, SQLite WAL)
-* Autonomous AI Agents & automation workflows (Hermes Agent, MCP, LiteLLM, n8n, OCR, local GPU inference)
+* Autonomous AI Agents & automation workflows (Hermes Agent, MCP, OmniRoute, n8n, OCR, local GPU inference)
 * Self-hosted infrastructure & DevOps (Docker, Linux, Traefik, Authentik SSO, CI/CD, Prometheus/Grafana, restic)
 * Legacy system modernization, reliability hardening, and operational automation
 
