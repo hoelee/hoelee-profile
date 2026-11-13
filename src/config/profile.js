@@ -16,32 +16,37 @@ export default {
 ====
 Senior Full-Stack, DevOps & AI Systems Engineer with 10+ years delivering enterprise software, distributed architectures, and autonomous AI systems.
 End-to-end ownership from requirements, architecture, and database design through deployment, monitoring, and ongoing production support.
-Independently designed and operates a 3-host production platform (162 Docker containers across Synology DSM, unRaid, and Ubuntu VPS) running live services at >99% uptime.
+Independently designed and operates a 3-host production platform (185 Docker containers across 95 Compose stacks on Synology DSM, unRaid, and an Ubuntu VPS) running live services at >99% uptime.
 
 About Me
 ----
 I am a hands-on engineer who likes owning a system from the first requirement to production support.
-Day to day that combines enterprise Java Spring Boot and PHP (CodeIgniter/modern) services, custom business architectures, and a self-managed 162-container Linux/Docker infrastructure covering Traefik reverse proxies, Authentik OIDC SSO, PostgreSQL/MySQL replication, and automated backup pipelines.
+Day to day that combines enterprise Java Spring Boot and PHP (CodeIgniter/modern) services, custom business architectures, and a self-managed 185-container Linux/Docker infrastructure covering Traefik reverse proxies, Authentik OIDC SSO, PostgreSQL/MySQL replication, and automated backup pipelines.
 I operate autonomous AI systems in production: agent runtimes (Hermes Agent, Model Context Protocol - MCP), LLM integration with strict human-in-the-loop gates, local GPU inference (RTX 3060 12GB: LM Studio, llama.cpp, whisper.cpp, ComfyUI), and deterministic-first automation loops.
-Creator of Keygate (offline Ed25519 cryptographic software licensing engine) and Digi Kedai (e-commerce automation agent).
+Creator of Keygate (offline Ed25519 cryptographic software licensing engine) and Digi Kedai (AI customer-service agent).
+Writes about the systems publicly: 15+ technical posts on blog.hoelee.com covering real migrations, debugging sessions and AI infrastructure on this platform.
 
 Core Skills
 ----
   - Languages: PHP, Java, Python, JavaScript, TypeScript, SQL, Bash, Solidity
   - Backend & APIs: Spring Boot, CodeIgniter 4, Node.js, REST API Architecture, Webhooks, Queue & Worker Patterns, Cron Loops, Transactional Email (Postfix/Dovecot/DKIM)
-  - Databases & Storage: PostgreSQL, MySQL / MariaDB, MySQL Master/Replica, SQLite (WAL mode), Redis
-  - DevOps & Infrastructure: Docker, Docker Compose, Portainer, Traefik (custom bot filter, automated ACME TLS), Nginx, Cloudflare, Linux (Debian/Ubuntu), Synology DSM, unRaid, Gitea Actions CI/CD, restic automated backups, Prometheus / Grafana / cAdvisor monitoring
-  - AI & Autonomous Agents: Hermes Agent, Model Context Protocol (MCP), OpenAI API, LLM Integration, OmniRoute gateway, n8n, OCR receipt verification, Local LLM Inference (LM Studio, llama.cpp GGUF), ComfyUI, whisper.cpp STT
+  - Databases & Storage: PostgreSQL (pgvector), MySQL / MariaDB, MySQL Master/Replica, SQLite (WAL mode), Redis, NocoDB
+  - DevOps & Infrastructure: Docker, Docker Compose, Portainer, Traefik (custom bot filter, automated ACME TLS), Nginx, Cloudflare / Cloudflare Tunnel, Linux (Debian/Ubuntu), Synology DSM, unRaid, Gitea Actions CI/CD, restic automated backups, Prometheus / Grafana / cAdvisor monitoring, Tor hidden-service publishing
+  - AI & Autonomous Agents: Hermes Agent, Model Context Protocol (MCP), OpenAI API, LLM Integration, OmniRoute gateway, n8n, fal.ai / FLUX.1 Kontext image compositing, OCR receipt verification, Local LLM Inference (LM Studio, llama.cpp GGUF, Qwen MoE), ComfyUI, whisper.cpp STT
   - Security & Identity: Authentik (OIDC / OAuth2 SSO), Passbolt, Ed25519 Cryptography, Fail2ban, Secret Management
-  - Frontend: JavaScript, TypeScript, Vue 3 + Vite, React (component practice), HTML5/CSS3, Responsive UI
-  - Tooling: Git (Self-Hosted Gitea, GitHub), VS Code, Playwright CDP automation, Postman
+  - Frontend: JavaScript, TypeScript, Vue 3 + Vite, Astro, React (component practice), HTML5/CSS3, Responsive UI
+  - Tooling: Git (Self-Hosted Gitea, GitHub), VS Code, Playwright / Chrome DevTools Protocol automation, Postman
 
 Selected Projects
 ----
-  - 162-Container Production Infrastructure — 3-host self-managed platform (Synology DSM, unRaid, Ubuntu 24.04 VPS) running 78+ compose stacks: Traefik reverse proxy fleet, Authentik SSO, Gitea Actions CI/CD, MySQL master/replica replication, and automated backups at >99% uptime.
+  - Three-Host Production Infrastructure — Self-managed platform running 185 containers across 95 Compose stacks: Synology DSM (101 containers / 54 stacks) for the bulk of services, unRaid (44 / 27) for storage, CI and monitoring, and an Ubuntu 24.04 VPS (40 / 14) as the public edge. Traefik reverse-proxy fleet with automated ACME TLS, authentik OIDC SSO, Gitea Actions CI/CD, MySQL master/replica replication, Prometheus/Grafana monitoring and automated restic backups at >99% uptime.
+  - AI Furniture Photo-Remix Plugin (chaijoywood.com) — Commercial WordPress plugin for a furniture manufacturer: a visitor uploads a photo of their own room and the client's furniture is composited into it with fal.ai FLUX.1 Kontext. Async job handling, gallery retention rules, spoof-resistant client-identity handling and an n8n lead relay to Telegram; shipped across 27 versioned releases.
   - Keygate Offline Software Licensing Engine — Standalone cryptographic licensing engine using Ed25519 signatures, machine hardware fingerprinting (CPU, BIOS, motherboard UUID), and anti-tamper counters with zero phone-home requirement.
-  - Digi Kedai E-Commerce & Customer-Support Agent — Multi-channel (Telegram + WhatsApp) transactional agent bot in TypeScript, OmniRoute gateway, persistent user memory (mem0), and automated payment webhook verification.
+  - Digi Kedai AI Customer-Service Agent — Telegram customer-service agent in TypeScript behind an OmniRoute model gateway, with persistent user memory (mem0), tool calling and automated payment-webhook verification, running in production on the platform above.
+  - Property Platform with Loan Calculator (jomcarirumah.com) — Live property-agency site on WordPress with a custom repayment and instalment calculator that pre-qualifies buyers instead of funnelling them into a contact form.
   - www.hoelee.com & linkd — Modern Astro 5 SSG personal hub (0 KB client JavaScript, Lighthouse mobile score 99, 0ms TBT) backed by linkd, a lightweight Node.js SQLite WAL shortlink engine with Authentik SSO admin.
+  - Self-Hosted Local AI Stack — GPU-passthrough Windows 11 VM on unRaid running LM Studio / llama.cpp (Qwen GGUF) for local inference, ComfyUI for image generation and whisper.cpp for speech-to-text, plus a mem0 + OmniRoute + pgvector memory and RAG stack in Docker.
+  - Published Technical Blog (blog.hoelee.com) — 15+ posts in English and Chinese, each written out of something that actually happened: a CodeIgniter 4 migration from IIS to OpenLiteSpeed, page-by-page verification of a generated 19-page PDF, RDP brute-force hardening, a self-hosted speech-to-text server.
   - Client Enterprise Systems & Web Builds — Delivered 30+ production websites and business systems for SME, NGO, and e-commerce clients across full lifecycles (requirements, architecture, code, deployment, ongoing maintenance).
   - Real-Time GPS Delivery Tracking Platform — Enterprise Java Spring Boot backend and Android app for real-time delivery tracking, live mapping, and automated dispatch.
 
@@ -50,8 +55,9 @@ Experience
   Full Stack Software Engineer — Joywood, Perak, Malaysia (Jan 2020 – Present)
   - Delivered 30+ production websites and business systems for SME, NGO, and e-commerce clients, owning the full lifecycle from requirements through architecture, deployment, and support.
   - Built AI-enabled customer support and workflow automation integrating the OpenAI API and OCR receipt verification, automating routine inquiries and manual data entry.
+  - Shipped a customer-facing AI product-visualisation feature on a client storefront (WordPress plugin, fal.ai FLUX.1 Kontext image compositing) through 27 versioned releases with a documented upgrade path.
   - Developed backend services and internal portals in PHP CodeIgniter and Java Spring Boot supporting billing, order processing, and customer operations.
-  - Designed and operate the three-host production infrastructure (162 containers across 78+ compose stacks) covering Traefik reverse proxies, Authentik SSO, Prometheus/Grafana monitoring, and automated backups.
+  - Designed and operate the three-host production infrastructure (185 containers across 95 Compose stacks) covering Traefik reverse proxies, authentik SSO, Prometheus/Grafana monitoring, and automated backups.
   - Automated ops pipelines and full-stack delivery in Python, orchestrating agentic coding workflows (Hermes Agent, MCP) with strict CI/CD and regression test gates.
 
   Founder / Full Stack Developer — Hoelee Enterprise (SifuMail), Malaysia (Sep 2019 – Apr 2023)
@@ -87,6 +93,7 @@ Currently Exploring
 ----
   - Solidity and smart-contract development (ERC-20 / ERC-721 with Foundry and Hardhat) — self-directed exploration.
   - Autonomous Agent runtimes, tool protocols (MCP), and local MoE model orchestration.
+  - Tor hidden-service (onion) publishing, so the same public services stay reachable when the clearnet path does not.
 
 
 `,
@@ -98,7 +105,7 @@ Thank you for reading!
 
 I'm open to Senior Full-Stack, Platform / DevOps, and AI Systems Engineering roles — building and operating reliable production systems end to end.
 
-* WhatsApp / Call → [+601****5290](tel:+601****5290)
+* WhatsApp / Call → [+60175885290](tel:+60175885290)
 * Email → [me@hoelee.com](mailto:me@hoelee.com)
 * Official Portfolio → [hoelee.com](https://www.hoelee.com/) · [hoelee.com/me](https://hoelee.com/me)
 * Verified CV & PDF → [doc.hoelee.com/cv.html](https://doc.hoelee.com/cv.html)
@@ -110,8 +117,8 @@ I'm open to Senior Full-Stack, Platform / DevOps, and AI Systems Engineering rol
 
 Where I deliver immediate value:
 * Full-stack application architecture (Java Spring Boot, PHP CodeIgniter, TypeScript, Vue 3, PostgreSQL, SQLite WAL)
-* Autonomous AI Agents & automation workflows (Hermes Agent, MCP, OmniRoute, n8n, OCR, local GPU inference)
-* Self-hosted infrastructure & DevOps (Docker, Linux, Traefik, Authentik SSO, CI/CD, Prometheus/Grafana, restic)
+* Autonomous AI Agents & agentic workflows (Hermes Agent, MCP, OmniRoute, n8n, fal.ai, OCR, local GPU inference)
+* Self-hosted infrastructure & DevOps (Docker, Linux, Traefik, authentik SSO, CI/CD, Prometheus/Grafana, restic, Cloudflare Tunnel / Tor egress)
 * Legacy system modernization, reliability hardening, and operational automation
 
   `,
