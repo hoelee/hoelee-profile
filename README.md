@@ -30,7 +30,7 @@ see Credits.
 | Path | Purpose |
 | --- | --- |
 | `src/App.vue` | Desktop layout — orchestrates the typewriter sequence |
-| `src/Mobile.vue` | Mobile layout (used when viewport ≤ 500px) |
+| `src/Mobile.vue` | Mobile/tablet layout (used when viewport ≤ 900px) |
 | `src/config/profile.js` | **All content lives here** — details, Markdown, animation speed, typed CSS |
 | `src/components/StyleEditor.vue` | Left panel: highlighted, self-typing CSS |
 | `src/components/ResumeEditor.vue` | Right panel: resume markdown → HTML |
@@ -67,7 +67,7 @@ Requires Node ≥ 18 (built and tested on Node 24).
 
 ## Deployment
 
-Pushed to **Gitea only** — `git.hoelee.com/hoelee/hoelee-profile`. There is no GitHub mirror.
+Source of truth: **Gitea** — `git.hoelee.com/hoelee/hoelee-profile` (mirrored to GitHub).
 
 `me.hoelee.com` is served by an `nginx:alpine` container (`nginx-me.hoelee.com`) on the VPS at
 `41.216.187.102`, behind Traefik. The container mounts the built site read-only:
@@ -84,8 +84,30 @@ npm run build
 rsync -av --delete dist/ root@41.216.187.102:/docker/web/me.hoelee.com/public/
 ```
 
-The site is static — no PHP or database is used. The `php:9000` upstream in the nginx config is a
-leftover from the shared web template and is not needed by this site.
+Without SSH the same build can be pushed over the Portainer Docker API with a tar archive
+(`PUT /api/endpoints/4/docker/containers/php-me.hoelee.com/archive?path=/var/www/html`) — that
+container is the writable side of the mount. Remove stale `static/js/index-*.js` bundles in place;
+do **not** delete and recreate the directory, because the read-only bind mount keeps pointing at the
+old inode and nginx starts returning 403.
+
+### Tor mirror
+
+The same container is published as a Tor onion service — the unRaid `tor-server` maps
+`hoeleeaiwowgndbxswegtdzoeupz7lkkechtqmurbmnpvwa4k3vyuyid.onion` to `41.216.187.102:10001`, which is
+this nginx. There is no second copy of the site: one deploy updates clearnet and onion together.
+
+### nginx config
+
+`deploy/nginx/me.hoelee.com.conf` is the versioned copy of the live config (gzip on, immutable
+caching for the hashed `static/` assets, SPA fallback to `index.html`). To apply:
+
+```bash
+scp deploy/nginx/me.hoelee.com.conf root@41.216.187.102:/docker/web/me.hoelee.com/nginx/default.conf
+ssh root@41.216.187.102 'docker exec nginx-me.hoelee.com nginx -t && docker exec nginx-me.hoelee.com nginx -s reload'
+```
+
+The site is static — no PHP or database is used. The `php:9000` sidecar is a leftover from the shared
+web template and is not needed by this site.
 
 ## Credits
 

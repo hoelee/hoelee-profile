@@ -23,13 +23,34 @@
       html { background: #004040; color: #dedede; }
       @media (max-width: 900px) { html { background: #002b36; } }
       body { margin: 0; }
+      /* Boot shell: the panes are drawn by a stylesheet the app types in, so without this
+         the page is an empty dark rectangle for the first seconds. Rendered before the
+         JS module loads; Vue replaces it on mount. */
+      #app > .boot {
+        display: flex; flex-direction: column; justify-content: center;
+        min-height: 100vh; padding: 0 8vw; box-sizing: border-box;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        line-height: 1.5;
+      }
+      #app > .boot .n { font-size: clamp(1.1rem, 2.6vw, 1.6rem); color: #eaeaea; }
+      #app > .boot .r { margin-top: .4em; color: #9fd6c9; }
+      #app > .boot .h { margin-top: 2.2em; color: #7f9c96; font-size: .85em; }
+      #app > .boot .h::after { content: '_'; animation: boot-blink 1s steps(1) infinite; }
+      @keyframes boot-blink { 50% { opacity: 0; } }
+      @media (prefers-reduced-motion: reduce) { #app > .boot .h::after { animation: none; } }
     </style>
     <meta name="theme-color" content="#004040" />
     <link rel="icon" type="image/x-icon" href="./favicon.ico">
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <div class="boot">
+        <p class="n">Mr Hoelee — Lee Teong Hoe</p>
+        <p class="r">Senior Full-Stack · DevOps · AI Systems Engineer — 10+ years, remote (GMT+8)</p>
+        <p class="h">rendering the resume</p>
+      </div>
+    </div>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
