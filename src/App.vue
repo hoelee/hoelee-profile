@@ -1,8 +1,10 @@
 <template>
   <div id="app">
+    <button v-if="animating" class="skip-btn" type="button" @click="finishAll">Skip animation →</button>
+    <button v-else class="skip-btn replay-btn" type="button" @click="replay">↻ Replay animation</button>
     <div id="content">
       <StyleEditor ref="styleEditor" :code="currentStyle"></StyleEditor>
-      <ResumeEditor ref="resumeEditor" :markdown="currentMarkdown" :enableHtml="enableHtml"></ResumeEditor>
+      <ResumeEditor ref="resumeEditor" :markdown="currentMarkdown" :enableHtml="enableHtml" :settled="!animating"></ResumeEditor>
     </div>
     <div id="foot">
       <ThankEditor ref="thankEditor" :markdown="currentThankMarkdown" :enableHtml="enableHtml"></ThankEditor>
@@ -33,23 +35,53 @@
         enableHtml: false,
         htmlShown: false,
         thanksShown: false,
+        animating: true,
+        cancelled: false,
         styleFull: profile.desktopStyles.join('')
       }
     },
     created() {
-      // Respect the OS "reduce motion" setting: render the finished page immediately
-      // instead of animating ~10 s of typing.
+      // Show the finished page immediately for anyone who asked for less motion
+      // or who has already sat through the animation once.
       const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
-      if (reduce) {
-        this.currentStyle = this.styleFull
-        this.currentMarkdown = this.fullMarkdown
-        this.enableHtml = true
-        this.currentThankMarkdown = this.thanksMarkdown
+      let seen = false
+      try { seen = window.localStorage.getItem('hoelee_cv_seen') === '1' } catch (e) { seen = false }
+      if (reduce || seen) {
+        this.finishAll()
         return
       }
-      this.makeResume()
+      this.makeResume().then(() => {
+        try { window.localStorage.setItem('hoelee_cv_seen', '1') } catch (e) { /* private mode */ }
+      })
     },
     methods: {
+      // Jump straight to the finished state: used by the skip button, reduced
+      // motion, and repeat visitors.
+      finishAll() {
+        this.cancelled = true
+        this.currentStyle = this.styleFull
+        this.currentMarkdown = this.fullMarkdown
+        this.currentThankMarkdown = this.thanksMarkdown
+        this.enableHtml = true
+        this.htmlShown = true
+        this.thanksShown = true
+        this.animating = false
+      },
+      // Replay is the only way back to the animation once it has been seen.
+      replay() {
+        this.cancelled = false
+        this.currentStyle = ''
+        this.currentMarkdown = ''
+        this.currentThankMarkdown = ''
+        this.enableHtml = false
+        this.htmlShown = false
+        this.thanksShown = false
+        this.animating = true
+        try { window.localStorage.removeItem('hoelee_cv_seen') } catch (e) { /* ignore */ }
+        this.makeResume().then(() => {
+          try { window.localStorage.setItem('hoelee_cv_seen', '1') } catch (e) { /* ignore */ }
+        })
+      },
       makeResume: async function () {
         // Both editors appear (background + borders), then the CSS types in the
         // left pane. During this the right pane is NOT blank: the resume editor
@@ -64,6 +96,7 @@
         await this.typeStyleRemaining()
         await this.showThanks()
         await this.progressivelyShowThanks()
+        this.animating = false
       },
       typeStyleUpToMarker(marker) {
         return new Promise((resolve) => {
@@ -105,6 +138,7 @@
         const total = this.styleFull.length
         const step = this.increment(total)
         const tick = () => {
+          if (this.cancelled) return resolve()
           if (this.currentStyle.length < total) {
             step()
             setTimeout(tick, this.interval)
@@ -117,6 +151,7 @@
       progressivelyShowStylePartial(target, resolve) {
         const step = this.increment(target)
         const tick = () => {
+          if (this.cancelled) return resolve()
           if (this.currentStyle.length < target) {
             step()
             setTimeout(tick, this.interval)
@@ -147,6 +182,7 @@
           const interval = this.interval
           const cpt = this.charsPerTick
           const showThanks = () => {
+            if (this.cancelled) return resolve()
             if (this.currentThankMarkdown.length < length) {
               this.currentThankMarkdown = this.thanksMarkdown.substring(0, Math.min(length, this.currentThankMarkdown.length + cpt))
               const prevChar = this.currentThankMarkdown[this.currentThankMarkdown.length - 2]
@@ -170,6 +206,31 @@
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  .skip-btn {
+    position: fixed;
+    top: .75em;
+    right: 1em;
+    z-index: 20;
+    padding: .45em .9em;
+    font: inherit;
+    font-size: .85rem;
+    color: #d7efe8;
+    background: rgba(0, 32, 32, .85);
+    border: 1px solid rgba(215, 239, 232, .45);
+    border-radius: 999px;
+    cursor: pointer;
+  }
+
+  .replay-btn {
+    opacity: .6;
+  }
+
+  .skip-btn:hover,
+  .skip-btn:focus-visible {
+    background: rgba(0, 48, 48, .95);
+    border-color: #d7efe8;
   }
 
   * {

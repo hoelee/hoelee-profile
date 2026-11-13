@@ -9,7 +9,7 @@ export default {
   // Effective speed = typingSpeed / charsPerTick. Lower delay = faster;
   // higher charsPerTick = fewer setTimeout hops = much faster and smoother.
   typingSpeed: 1,
-  charsPerTick: 5,
+  charsPerTick: 18,
 
   // Resume content in Markdown
   resumeMarkdown: `Mr. Hoelee (Lee Teong Hoe)
@@ -31,7 +31,7 @@ Core Skills
   - Languages: PHP, Java, Python, JavaScript, TypeScript, SQL, Bash, Solidity
   - Backend & APIs: Spring Boot, CodeIgniter 4, Node.js, REST API Architecture, Webhooks, Queue & Worker Patterns, Cron Loops, Transactional Email (Postfix/Dovecot/DKIM)
   - Databases & Storage: PostgreSQL (pgvector), MySQL / MariaDB, MySQL Master/Replica, SQLite (WAL mode), Redis, NocoDB
-  - DevOps & Infrastructure: Docker, Docker Compose, Portainer, Traefik (custom bot filter, automated ACME TLS), Nginx, Cloudflare / Cloudflare Tunnel, Linux (Debian/Ubuntu), Synology DSM, unRaid, Gitea Actions CI/CD, restic automated backups, Prometheus / Grafana / cAdvisor monitoring, Tor hidden-service publishing
+  - DevOps & Infrastructure: Docker, Docker Compose, Portainer, Traefik (custom bot filter, automated ACME TLS), Nginx, Cloudflare / Cloudflare Tunnel, Linux (Debian/Ubuntu), Synology DSM, unRaid, Gitea Actions CI/CD, restic automated backups, Prometheus / Grafana / cAdvisor monitoring
   - AI & Autonomous Agents: Hermes Agent, Model Context Protocol (MCP), OpenAI API, LLM Integration, OmniRoute gateway, n8n, fal.ai / FLUX.1 Kontext image compositing, OCR receipt verification, Local LLM Inference (LM Studio, llama.cpp GGUF, Qwen MoE), ComfyUI, whisper.cpp STT
   - Security & Identity: Authentik (OIDC / OAuth2 SSO), Passbolt, Ed25519 Cryptography, Fail2ban, Secret Management
   - Frontend: JavaScript, TypeScript, Vue 3 + Vite, Astro, React (component practice), HTML5/CSS3, Responsive UI
@@ -93,7 +93,6 @@ Currently Exploring
 ----
   - Solidity and smart-contract development (ERC-20 / ERC-721 with Foundry and Hardhat) — self-directed exploration.
   - Autonomous Agent runtimes, tool protocols (MCP), and local MoE model orchestration.
-  - Tor hidden-service (onion) publishing, so the same public services stay reachable when the clearnet path does not.
 
 
 `,
@@ -118,7 +117,7 @@ I'm open to Senior Full-Stack, Platform / DevOps, and AI Systems Engineering rol
 Where I deliver immediate value:
 * Full-stack application architecture (Java Spring Boot, PHP CodeIgniter, TypeScript, Vue 3, PostgreSQL, SQLite WAL)
 * Autonomous AI Agents & agentic workflows (Hermes Agent, MCP, OmniRoute, n8n, fal.ai, OCR, local GPU inference)
-* Self-hosted infrastructure & DevOps (Docker, Linux, Traefik, authentik SSO, CI/CD, Prometheus/Grafana, restic, Cloudflare Tunnel / Tor egress)
+* Self-hosted infrastructure & DevOps (Docker, Linux, Traefik, authentik SSO, CI/CD, Prometheus/Grafana, restic, Cloudflare Tunnel)
 * Legacy system modernization, reliability hardening, and operational automation
 
   `,
@@ -317,6 +316,54 @@ body{
   overflow-x: hidden;
 }
 
+`,
+`/*
+ * Readability pass (2026-11-13 review): a 70vh inner-scroll box hid 77% of the
+ * resume behind a nested scrollbar and broke Ctrl+F / native print. The page
+ * scrolls now and only the code pane stays pinned while it types.
+ */
+#content{
+  display: flex;
+  align-items: flex-start;
+  height: auto;
+  overflow: visible;
+}
+#foot{
+  min-height: 0;
+}
+.styleEditor{
+  position: sticky;
+  top: .5em;
+  flex: 0 0 calc(50vw - 1em);
+  height: auto;
+  max-height: 85vh;
+  margin: .5em 0 .5em .5em;
+  overflow: auto;
+  -webkit-transform: none;
+          transform: none;
+}
+.resumeEditor{
+  position: static;
+  flex: 0 0 calc(50vw - 1em);
+  height: auto;
+  max-height: none;
+  margin: .5em .5em .5em 0;
+  overflow: visible;
+}
+.resumeEditor > div{
+  padding-bottom: .5em;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.thankEditor{
+  min-height: 0;
+  -webkit-transform: none;
+          transform: none;
+}
+.thankEditor > div{
+  max-width: 68ch;
+  margin: 0 auto;
+}
 `],
 
   mobileStyles: [
@@ -478,6 +525,25 @@ html, body {
   overflow-x: hidden;
   overflow-y: auto;
   max-width: 100%;
+}
+
+/*
+ * Readability pass (2026-11-13 review): the code pane was eating 47vh above the
+ * CV and the resume sat in a 48.5vh inner-scroll box (11% visible on a phone).
+ * The code pane is a 100px live strip now; the document itself scrolls.
+ */
+.styleEditor{
+  height: 12vh;
+  max-height: 100px;
+  overflow: auto;
+}
+.resumeEditor{
+  height: auto;
+  max-height: none;
+  overflow: visible;
+}
+.thankEditor{
+  overflow: visible;
 }
 `]
 }

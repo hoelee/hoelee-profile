@@ -1,7 +1,9 @@
 <template>
   <div id="app">
+    <button v-if="animating" class="skip-btn" type="button" @click="finishAll">Skip animation →</button>
+    <button v-else class="skip-btn replay-btn" type="button" @click="replay">↻ Replay animation</button>
     <StyleEditor ref="styleEditor" :code="currentStyle"></StyleEditor>
-    <ResumeEditor ref="resumeEditor" :markdown="currentMarkdown" :enableHtml="enableHtml"></ResumeEditor>
+    <ResumeEditor ref="resumeEditor" :markdown="currentMarkdown" :enableHtml="enableHtml" :settled="!animating"></ResumeEditor>
     <ThankEditor ref="thankEditor" :markdown="currentThankMarkdown" :enableHtml="enableHtml"></ThankEditor>
   </div>
 </template>
@@ -27,27 +29,54 @@
         currentMarkdown: '',
         currentThankMarkdown: '',
         enableHtml: false,
+        animating: true,
+        cancelled: false,
         styleFull: profile.mobileStyles.join('')
       }
     },
     created() {
-      // Respect the OS "reduce motion" setting: render the finished page immediately.
+      // Finished page immediately for reduced motion or a repeat visit.
       const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
-      if (reduce) {
-        this.currentStyle = this.styleFull
-        this.currentMarkdown = this.fullMarkdown
-        this.enableHtml = true
-        this.currentThankMarkdown = this.thanksMarkdown
+      let seen = false
+      try { seen = window.localStorage.getItem('hoelee_cv_seen') === '1' } catch (e) { seen = false }
+      if (reduce || seen) {
+        this.finishAll()
         return
       }
-      this.makeResume()
+      this.makeResume().then(() => {
+        try { window.localStorage.setItem('hoelee_cv_seen', '1') } catch (e) { /* private mode */ }
+      })
     },
     methods: {
+      finishAll() {
+        this.cancelled = true
+        this.currentStyle = this.styleFull
+        this.currentMarkdown = this.fullMarkdown
+        this.currentThankMarkdown = this.thanksMarkdown
+        this.enableHtml = true
+        this.animating = false
+      },
+      // Replay is the only way back to the animation once it has been seen.
+      replay() {
+        this.cancelled = false
+        this.currentStyle = ''
+        this.currentMarkdown = ''
+        this.currentThankMarkdown = ''
+        this.enableHtml = false
+        this.htmlShown = false
+        this.thanksShown = false
+        this.animating = true
+        try { window.localStorage.removeItem('hoelee_cv_seen') } catch (e) { /* ignore */ }
+        this.makeResume().then(() => {
+          try { window.localStorage.setItem('hoelee_cv_seen', '1') } catch (e) { /* ignore */ }
+        })
+      },
       makeResume: async function () {
         await this.typeStyleUpToMarker('/* Start writing resume */')
         await this.showHtml()
         await this.typeStyleRemaining()
         await this.progressivelyShowThanks()
+        this.animating = false
       },
       typeStyleUpToMarker(marker) {
         return new Promise((resolve) => {
@@ -75,6 +104,7 @@
         const total = this.styleFull.length
         const step = this.increment(total)
         const tick = () => {
+          if (this.cancelled) return resolve()
           if (this.currentStyle.length < total) {
             step()
             setTimeout(tick, this.interval)
@@ -87,6 +117,7 @@
       progressivelyShowStylePartial(target, resolve) {
         const step = this.increment(target)
         const tick = () => {
+          if (this.cancelled) return resolve()
           if (this.currentStyle.length < target) {
             step()
             setTimeout(tick, this.interval)
@@ -115,6 +146,7 @@
           const interval = this.interval
           const cpt = this.charsPerTick
           const showThanks = () => {
+            if (this.cancelled) return resolve()
             if (this.currentThankMarkdown.length < length) {
               this.currentThankMarkdown = this.thanksMarkdown.substring(0, Math.min(length, this.currentThankMarkdown.length + cpt))
               // No auto-scroll while typing: yanking the page to the bottom on every tick
@@ -145,5 +177,24 @@
   }
   *{
     box-sizing: border-box;
+  }
+
+  .skip-btn {
+    position: fixed;
+    top: .6em;
+    right: .75em;
+    z-index: 20;
+    padding: .4em .8em;
+    font: inherit;
+    font-size: .8rem;
+    color: #d7efe8;
+    background: rgba(0, 32, 32, .85);
+    border: 1px solid rgba(215, 239, 232, .45);
+    border-radius: 999px;
+    cursor: pointer;
+  }
+
+  .replay-btn {
+    opacity: .6;
   }
 </style>

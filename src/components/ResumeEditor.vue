@@ -1,5 +1,5 @@
 <template>
-  <div class="resumeEditor" :class="{htmlMode:enableHtml}" ref="container">
+  <div class="resumeEditor" :class="{htmlMode:enableHtml}" ref="container" :aria-live="settled ? 'polite' : 'off'" tabindex="0">
     <div v-if="enableHtml" v-html="result"></div>
     <pre v-else>{{result}}</pre>
   </div>
@@ -8,7 +8,7 @@
 <script>
   import { marked } from 'marked'
   export default {
-    props: ['markdown', 'enableHtml'],
+    props: ['markdown', 'enableHtml', 'settled'],
     name: 'ResumeEditor',
     computed: {
       result: function () {
