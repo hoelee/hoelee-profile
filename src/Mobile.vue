@@ -31,6 +31,15 @@
       }
     },
     created() {
+      // Respect the OS "reduce motion" setting: render the finished page immediately.
+      const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      if (reduce) {
+        this.currentStyle = this.styleFull
+        this.currentMarkdown = this.fullMarkdown
+        this.enableHtml = true
+        this.currentThankMarkdown = this.thanksMarkdown
+        return
+      }
       this.makeResume()
     },
     methods: {
@@ -108,10 +117,9 @@
           const showThanks = () => {
             if (this.currentThankMarkdown.length < length) {
               this.currentThankMarkdown = this.thanksMarkdown.substring(0, Math.min(length, this.currentThankMarkdown.length + cpt))
-              this.$nextTick(() => {
-                // Keep the newly revealed thanks section in view as it grows.
-                window.scrollTo(0, document.body.scrollHeight)
-              })
+              // No auto-scroll while typing: yanking the page to the bottom on every tick
+              // moved the resume the reader was looking at out of view. The panel sits in
+              // normal flow right below the resume, so the reader reaches it by scrolling.
               setTimeout(showThanks, interval)
             } else {
               resolve()

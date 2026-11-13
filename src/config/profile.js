@@ -44,7 +44,7 @@ Selected Projects
   - Keygate Offline Software Licensing Engine — Standalone cryptographic licensing engine using Ed25519 signatures, machine hardware fingerprinting (CPU, BIOS, motherboard UUID), and anti-tamper counters with zero phone-home requirement.
   - Digi Kedai AI Customer-Service Agent — Telegram customer-service agent in TypeScript behind an OmniRoute model gateway, with persistent user memory (mem0), tool calling and automated payment-webhook verification, running in production on the platform above.
   - Property Platform with Loan Calculator (jomcarirumah.com) — Live property-agency site on WordPress with a custom repayment and instalment calculator that pre-qualifies buyers instead of funnelling them into a contact form.
-  - www.hoelee.com & linkd — Modern Astro 5 SSG personal hub (0 KB client JavaScript, Lighthouse mobile score 99, 0ms TBT) backed by linkd, a lightweight Node.js SQLite WAL shortlink engine with Authentik SSO admin.
+  - [www.hoelee.com](https://www.hoelee.com) & linkd — Modern Astro 5 SSG personal hub (0 KB client JavaScript, Lighthouse mobile score 99, 0ms TBT) backed by linkd, a lightweight Node.js SQLite WAL shortlink engine with Authentik SSO admin.
   - Self-Hosted Local AI Stack — GPU-passthrough Windows 11 VM on unRaid running LM Studio / llama.cpp (Qwen GGUF) for local inference, ComfyUI for image generation and whisper.cpp for speech-to-text, plus a mem0 + OmniRoute + pgvector memory and RAG stack in Docker.
   - Published Technical Blog (blog.hoelee.com) — 15+ posts in English and Chinese, each written out of something that actually happened: a CodeIgniter 4 migration from IIS to OpenLiteSpeed, page-by-page verification of a generated 19-page PDF, RDP brute-force hardening, a self-hosted speech-to-text server.
   - Client Enterprise Systems & Web Builds — Delivered 30+ production websites and business systems for SME, NGO, and e-commerce clients across full lifecycles (requirements, architecture, code, deployment, ongoing maintenance).
@@ -184,7 +184,7 @@ html{
   width: calc(50vw - 1em); height: 70vh;
   border: 1px solid;
   background: rgb(200,200,200); color: #222;
-  overflow: auto;
+  overflow-y: auto; overflow-x: hidden;
   -webkit-transition: none;
   transition: none;
   -webkit-transform: rotateY(-10deg) translateZ(-100px);
@@ -308,8 +308,8 @@ html{
   overflow: visible;
   -webkit-transition: none;
   transition: none;
-  -webkit-transform: rotateX(-10deg) translateZ(-200px);
-          transform: rotateX(-10deg) translateZ(-200px);
+  -webkit-transform: rotateX(-10deg);
+          transform: rotateX(-10deg);
 }
 
 /* keep horizontal scrolling off; allow vertical scroll when short */

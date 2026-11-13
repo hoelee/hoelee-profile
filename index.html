@@ -16,6 +16,15 @@
     <meta name="twitter:title" content="Mr Hoelee — Senior Full-Stack, DevOps & AI Systems Engineer">
     <meta name="twitter:description" content="Interactive animated resume of Lee Teong Hoe — Senior Full-Stack, DevOps & AI Systems Engineer.">
     <title>Mr Hoelee — Senior Full-Stack, DevOps & AI Systems Engineer</title>
+    <!-- First paint: match the animation's own palette so the page never flashes white
+         before the synthetic stylesheet has been typed in. Keep these in sync with
+         src/config/profile.js (desktopStyles / mobileStyles html{background}). -->
+    <style>
+      html { background: #004040; color: #dedede; }
+      @media (max-width: 900px) { html { background: #002b36; } }
+      body { margin: 0; }
+    </style>
+    <meta name="theme-color" content="#004040" />
     <link rel="icon" type="image/x-icon" href="./favicon.ico">
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
   </head>

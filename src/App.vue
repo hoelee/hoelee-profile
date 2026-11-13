@@ -37,6 +37,16 @@
       }
     },
     created() {
+      // Respect the OS "reduce motion" setting: render the finished page immediately
+      // instead of animating ~10 s of typing.
+      const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      if (reduce) {
+        this.currentStyle = this.styleFull
+        this.currentMarkdown = this.fullMarkdown
+        this.enableHtml = true
+        this.currentThankMarkdown = this.thanksMarkdown
+        return
+      }
       this.makeResume()
     },
     methods: {
